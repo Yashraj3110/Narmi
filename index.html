@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NarmiTech - Elite Recruitment & Custom Web Development</title>
+    <title>NarmiTech - Build. Connect. Scale. | Elite Recruitment & Web Development</title>
     
-    <!-- Tailwind CSS CDN with configuration matching the logo theme -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,21 +13,30 @@
                 extend: {
                     colors: {
                         brand: {
-                            50: '#f0f6ff',
-                            100: '#e0edff',
-                            200: '#b8daf6',
-                            500: '#005bf3', /* Electric Blue from logo */
-                            600: '#004bce',
-                            700: '#003ca8',
-                            900: '#031b4e',
-                            950: '#02091d'  /* Dark midnight background matching logo */
+                            // Electric Brand Blue from left side of N
+                            blue: '#0066fe',
+                            'blue-dark': '#0052cc',
+                            // Electric Tech Green from right side of T
+                            green: '#05d580',
+                            'green-light': '#1ddc94',
                         },
-                        accent: {
-                            50: '#eefef6',
-                            500: '#0bdc7b', /* Neon Green/Teal from logo */
-                            600: '#09be69',
-                            700: '#069451',
-                            950: '#011c0f'
+                        narmiblue: {
+                            50: '#f0f6ff',
+                            100: '#e0ecff',
+                            500: '#0066fe',
+                            600: '#0052cc',
+                            950: '#020617',
+                        },
+                        narmigreen: {
+                            50: '#f0fdf4',
+                            400: '#1ddc94',
+                            500: '#05d580',
+                            600: '#04af69',
+                        },
+                        // Midnight Obsidian Backdrop matching narmi.jpeg exactly
+                        obsidian: {
+                            DEFAULT: '#030816',
+                            950: '#01040d'
                         }
                     },
                     fontFamily: {
@@ -39,22 +47,79 @@
         }
     </script>
     
-    <!-- Google Fonts & FontAwesome -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Alpine.js CDN for reactivity -->
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-    
     <style>
         [x-cloak] { display: none !important; }
         body {
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        /* Custom scrollbar matching logo colors */
+        
+        /* Celestial Fluid Backdrop Design */
+        .celestial-silk {
+            background-color: #f8fafc;
+        }
+        .dark .celestial-silk {
+            background-color: #030816;
+        }
+
+        /* Abstract circuit diagonal patterns inspired by top-right & bottom-left of narmi.jpeg */
+        .circuit-lines {
+            background-size: 80px 80px;
+            background-image: 
+                linear-gradient(135deg, rgba(0, 102, 254, 0.03) 25%, transparent 25%),
+                linear-gradient(225deg, rgba(5, 213, 128, 0.03) 25%, transparent 25%);
+        }
+        .dark .circuit-lines {
+            background-image: 
+                linear-gradient(135deg, rgba(0, 102, 254, 0.06) 1px, transparent 1px),
+                linear-gradient(225deg, rgba(5, 213, 128, 0.06) 1px, transparent 1px);
+        }
+
+        /* Glowing Microdot Matrix */
+        .dots-constellation {
+            background-image: radial-gradient(rgba(0, 102, 254, 0.07) 1.2px, transparent 1.2px);
+            background-size: 24px 24px;
+        }
+        .dark .dots-constellation {
+            background-image: radial-gradient(rgba(5, 213, 128, 0.09) 1.2px, transparent 1.2px);
+        }
+
+        /* Premium Glassmorphism Cards */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        .dark .glass-card {
+            background: rgba(4, 10, 27, 0.75);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 102, 254, 0.15);
+        }
+
+        /* Ambient Blob Animations */
+        @keyframes drift-slow {
+            0%, 100% { transform: translate(0px, 0px) scale(1); }
+            33% { transform: translate(40px, -60px) scale(1.15); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+        @keyframes drift-reverse {
+            0%, 100% { transform: translate(0px, 0px) scale(1.1); }
+            50% { transform: translate(-50px, 50px) scale(0.95); }
+        }
+        .animate-drift-1 {
+            animation: drift-slow 16s ease-in-out infinite;
+        }
+        .animate-drift-2 {
+            animation: drift-reverse 20s ease-in-out infinite;
+        }
+
+        /* Global Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
@@ -62,116 +127,125 @@
             background: transparent;
         }
         .dark ::-webkit-scrollbar-thumb {
-            background: #005bf3;
+            background: rgba(0, 102, 254, 0.25);
             border-radius: 9999px;
         }
         ::-webkit-scrollbar-thumb {
-            background: #0bdc7b;
+            background: rgba(148, 163, 184, 0.4);
             border-radius: 9999px;
         }
     </style>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 </head>
-
 <body x-data="{ 
     darkMode: true, 
     activePage: 'home', 
     mobileMenuOpen: false,
     notifications: [],
+    
     showNotification(msg, type='success') {
         this.notifications.push({ id: Date.now(), text: msg, type: type });
         setTimeout(() => { this.notifications.shift(); }, 4000);
     },
     reviews: [
-        { name: 'Sarah Jenkins', company: 'FinTech Group', role: 'HR Director', text: 'Narmi transformed our recruitment process. They brought us 3 senior React engineers in record time!', rating: 5, category: 'recruitment', date: '2 days ago' },
-        { name: 'Michael Chen', company: 'Bloom Coffee', role: 'Founder', text: 'We needed a highly-optimized static website with reviews integrated. NarmiTech delivered a blistering fast landing page. Highly recommend!', rating: 5, category: 'webdev', date: '1 week ago' },
-        { name: 'Emma Watson', company: 'Apex Logistics', role: 'CTO', text: 'Perfect tandem! They designed our brand new portal and immediately sourced the tech support team to handle operations.', rating: 5, category: 'both', date: '3 weeks ago' },
-        { name: 'David Miller', company: 'DevLabs Corp', role: 'Engineering Director', text: 'Stunning turnaround. Sourced top-tier Go developers and refreshed our static docs site in under a month.', rating: 5, category: 'both', date: '1 month ago' }
+        { name: 'Marcus Sterling', company: 'Solaria Inc.', role: 'VP of Product', text: 'NarmiTech delivered 3 premium full-stack developers in under 10 days. Their pre-screening process is unmatched.', rating: 5, category: 'recruitment', date: '3 days ago' },
+        { name: 'Katarina Varga', company: 'Zeta Financial', role: 'Operations Director', text: 'Build, Connect, Scale is not just a tagline. They rebuilt our entire portal with blinding speeds and modern aesthetics.', rating: 5, category: 'webdev', date: '1 week ago' },
+        { name: 'Devon Takahashi', company: 'Nova Labs', role: 'CTO', text: 'Exceptional visual polish and flawless code. Sourced the design leaders and simultaneously engineered our corporate site.', rating: 5, category: 'both', date: '3 weeks ago' }
     ],
     newReview: { name: '', company: '', role: '', text: '', rating: 5, category: 'webdev' },
     addReview() {
         if(!this.newReview.name || !this.newReview.text) {
-            this.showNotification('Please fill in your name and review text.', 'error');
+            this.showNotification('Please fill in all review fields.', 'error');
             return;
         }
         this.reviews.unshift({
             name: this.newReview.name,
-            company: this.newReview.company || 'Independent',
-            role: this.newReview.role || 'Client',
+            company: this.newReview.company || 'Global Tech',
+            role: this.newReview.role || 'Partner',
             text: this.newReview.text,
             rating: parseInt(this.newReview.rating),
             category: this.newReview.category,
             date: 'Just now'
         });
         this.newReview = { name: '', company: '', role: '', text: '', rating: 5, category: 'webdev' };
-        this.showNotification('Thank you! Your review has been posted successfully.');
+        this.showNotification('Your feedback has been verified and posted!');
+        this.$nextTick(() => { AOS.refresh(); });
     },
     
-    // Web design dynamic estimation parameters
-    calcPages: 3,
-    calcFeatures: { contact: true, blog: false, dark: true, customGraphics: false, seo: true },
+    calcPages: 5,
+    calcFeatures: { contact: true, blog: false, dark: true, customGraphics: true, seo: true },
     calcUrgency: 'standard',
     get webDevQuote() {
-        let base = 499; 
-        base += (this.calcPages - 1) * 85;
-        if(this.calcFeatures.blog) base += 150;
-        if(this.calcFeatures.dark) base += 75;
-        if(this.calcFeatures.customGraphics) base += 120;
-        if(this.calcFeatures.seo) base += 90;
+        let base = 599; 
+        base += (this.calcPages - 1) * 90;
+        if(this.calcFeatures.blog) base += 200;
+        if(this.calcFeatures.dark) base += 100;
+        if(this.calcFeatures.customGraphics) base += 150;
+        if(this.calcFeatures.seo) base += 120;
         
-        if(this.calcUrgency === 'express') base += 250;
-        if(this.calcUrgency === 'relaxed') base -= 50;
+        if(this.calcUrgency === 'express') base += 300;
+        if(this.calcUrgency === 'relaxed') base -= 60;
         return base;
     },
 
-    // Recruitment estimation parameters
     recruitmentRole: 'developer',
     recruitmentHires: 1,
     get recruitmentQuote() {
-        let costPerHire = 1200;
-        if (this.recruitmentRole === 'designer') costPerHire = 950;
-        if (this.recruitmentRole === 'manager') costPerHire = 1900;
-        if (this.recruitmentRole === 'executive') costPerHire = 3800;
+        let costPerHire = 1350;
+        if (this.recruitmentRole === 'designer') costPerHire = 1000;
+        if (this.recruitmentRole === 'manager') costPerHire = 2100;
+        if (this.recruitmentRole === 'executive') costPerHire = 4200;
         
         let subtotal = costPerHire * this.recruitmentHires;
-        if (this.recruitmentHires >= 3) subtotal *= 0.9; // 10% discount for bulk
+        if (this.recruitmentHires >= 3) subtotal *= 0.85; // 15% bulk discount
         return Math.round(subtotal);
     },
 
-    // Candidate Pool showcase (interactive)
-    candidates: [
-        { name: 'Alex M.', role: 'Senior React Developer', experience: '6+ Years', skills: ['React', 'Next.js', 'Tailwind', 'TypeScript'], status: 'Available', hourly: '$65' },
-        { name: 'Sofia R.', role: 'Lead DevOps Engineer', experience: '8+ Years', skills: ['AWS', 'Kubernetes', 'Docker', 'CI/CD'], status: 'Interviewing', hourly: '$85' },
-        { name: 'Kaelen D.', role: 'Senior Python & Go Developer', experience: '5+ Years', skills: ['Python', 'Go', 'gRPC', 'PostgreSQL'], status: 'Available', hourly: '$70' },
-        { name: 'Aria S.', role: 'UI/UX Designer', experience: '4 Years', skills: ['Figma', 'Prototyping', 'Design Systems'], status: 'Available', hourly: '$55' }
-    ],
-
-    // Contact Form submission variables
     contactName: '',
     contactEmail: '',
     contactMessage: '',
     contactService: 'both',
     submitContact() {
         if(!this.contactName || !this.contactEmail || !this.contactMessage) {
-            this.showNotification('Please fill in all required fields.', 'error');
+            this.showNotification('Please provide all requested details.', 'error');
             return;
         }
-        this.showNotification('Inquiry Sent! Our team will contact you within 4 business hours.');
+        this.showNotification('Transmission Secured! Our engineering team will contact you within 2-4 hours.');
         this.contactName = '';
         this.contactEmail = '';
         this.contactMessage = '';
     }
-}" :class="darkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'" class="min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white">
+}" 
+x-init="
+    $watch('activePage', value => {
+        window.scrollTo({top: 0});
+        setTimeout(() => { AOS.refreshHard(); }, 150);
+    });
+"
+:class="darkMode ? 'dark bg-obsidian text-slate-100' : 'bg-slate-50 text-slate-900'" 
+class="min-h-screen flex flex-col antialiased selection:bg-brand-blue selection:text-white relative overflow-x-hidden">
 
-    <!-- Floating Banners -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden z-0">
+        <div class="absolute inset-0 dots-constellation opacity-45 dark:opacity-30"></div>
+        <div class="absolute inset-0 circuit-lines opacity-40 dark:opacity-50"></div>
+        
+        <!-- Glowing Ambient Orbs matching narmi.jpeg colors -->
+        <div class="absolute top-[-10%] left-[-10%] w-[55%] h-[45%] rounded-full bg-gradient-to-tr from-brand-blue/20 to-indigo-500/5 blur-[150px] animate-drift-1"></div>
+        <div class="absolute top-[35%] right-[-10%] w-[50%] h-[50%] rounded-full bg-gradient-to-br from-brand-green/15 to-emerald-500/5 blur-[160px] animate-drift-2"></div>
+        <div class="absolute bottom-[-10%] left-[5%] w-[45%] h-[45%] rounded-full bg-gradient-to-tr from-brand-blue/15 to-brand-green/10 blur-[180px] animate-drift-1"></div>
+    </div>
+
+    <!-- Alert Notifications System -->
     <div class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4 sm:px-0">
         <template x-for="n in notifications" :key="n.id">
             <div x-transition:enter="transition ease-out duration-300 transform translate-y-2 opacity-0"
                  x-transition:enter-end="transform translate-y-0 opacity-100"
                  x-transition:leave="transition ease-in duration-200 transform translate-y-2 opacity-0"
-                 class="p-4 rounded-2xl shadow-xl flex items-start space-x-3 pointer-events-auto border backdrop-blur-lg"
-                 :class="n.type === 'success' ? 'bg-emerald-50/90 dark:bg-emerald-950/90 text-emerald-800 dark:text-emerald-200 border-emerald-200 dark:border-emerald-800' : 'bg-rose-50/90 dark:bg-rose-950/90 text-rose-800 dark:text-rose-200 border-rose-200 dark:border-rose-800'">
+                 class="p-4 rounded-xl shadow-2xl flex items-start space-x-3 pointer-events-auto border backdrop-blur-lg"
+                 :class="n.type === 'success' ? 'bg-emerald-500/10 text-emerald-800 dark:text-emerald-200 border-emerald-500/35' : 'bg-rose-500/10 text-rose-800 dark:text-rose-200 border-rose-500/35'">
                 <span class="text-xl mt-0.5">
-                    <i :class="n.type === 'success' ? 'fas fa-check-circle text-emerald-500' : 'fas fa-exclamation-circle text-rose-500'"></i>
+                    <i :class="n.type === 'success' ? 'fas fa-check-circle text-brand-green' : 'fas fa-exclamation-circle text-rose-500'"></i>
                 </span>
                 <div class="flex-1">
                     <p class="text-xs font-semibold" x-text="n.text"></p>
@@ -180,72 +254,78 @@
         </template>
     </div>
 
-    <!-- Header & Navigation Bar -->
-    <header class="sticky top-0 z-40 w-full backdrop-blur-md border-b transition-colors duration-300" 
-            :class="darkMode ? 'bg-slate-950/80 border-slate-900' : 'bg-white/80 border-slate-200'">
+    <!-- Navigation Header -->
+    <header class="sticky top-0 z-40 w-full backdrop-blur-xl border-b transition-colors duration-300" 
+            :class="darkMode ? 'bg-obsidian/85 border-slate-900/80' : 'bg-white/85 border-slate-200/80'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
-                <!-- Brand Logo (Featuring image_a71385.jpg) -->
+                <!-- NarmiTech Brand Logo Container -->
                 <div class="flex items-center space-x-3 cursor-pointer group" @click="activePage = 'home'">
-                    <div class="w-11 h-11 rounded-xl bg-slate-950 flex items-center justify-center overflow-hidden shadow-md shadow-brand-500/20 border border-brand-500/30 group-hover:scale-105 transition-transform duration-300">
-                        <img src="narmi.jpeg" alt="NarmiTech Logo Symbol" class="w-full h-full object-cover scale-150">
+                    <div class="relative w-12 h-12 rounded-xl bg-gradient-to-tr from-brand-blue to-brand-green p-[1px] shadow-lg shadow-brand-blue/15 group-hover:scale-105 transition-transform duration-300 overflow-hidden">
+                        <div class="w-full h-full bg-slate-900 rounded-xl flex items-center justify-center overflow-hidden">
+                            <!-- Directly reference the specified file name verbatim -->
+                            <img src="narmi.jpeg" alt="NarmiTech Logo Symbol" class="w-full h-full object-cover scale-150 transform">
+                        </div>
                     </div>
                     <div>
-                        <span class="text-xl font-black tracking-tight bg-gradient-to-r from-brand-500 via-emerald-400 to-accent-500 bg-clip-text text-transparent">NarmiTech</span>
-                        <span class="block text-[8px] tracking-widest uppercase font-extrabold text-slate-500 dark:text-slate-400">BUILD. CONNECT. SCALE.</span>
+                        <div class="flex items-center">
+                            <span class="text-2xl font-black tracking-tight bg-gradient-to-r from-brand-blue via-brand-blue to-brand-green bg-clip-text text-transparent">Narmi</span>
+                            <span class="text-2xl font-black tracking-tight text-slate-800 dark:text-slate-100">Tech</span>
+                        </div>
+                        <span class="block text-[8px] tracking-[0.25em] uppercase font-extrabold text-slate-400 dark:text-brand-green">BUILD. CONNECT. SCALE.</span>
                     </div>
                 </div>
 
-                <!-- Desktop Navigation Menu -->
-                <nav class="hidden md:flex items-center space-x-1">
+                <!-- Desktop Menu Options -->
+                <nav class="hidden lg:flex items-center space-x-1 p-1 rounded-xl border"
+                     :class="darkMode ? 'bg-slate-900/60 border-slate-800/80' : 'bg-slate-100 border-slate-200'">
                     <button @click="activePage = 'home'" 
-                            :class="activePage === 'home' ? 'bg-brand-500/10 text-brand-500 dark:text-accent-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-900'" 
-                            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200">Home</button>
+                            :class="activePage === 'home' ? 'bg-brand-blue text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40'" 
+                            class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200">Home</button>
                     <button @click="activePage = 'recruitment'" 
-                            :class="activePage === 'recruitment' ? 'bg-brand-500/10 text-brand-500 dark:text-accent-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-900'" 
-                            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200">Recruitment</button>
+                            :class="activePage === 'recruitment' ? 'bg-brand-blue text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40'" 
+                            class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200">Connect Sourcing</button>
                     <button @click="activePage = 'webdev'" 
-                            :class="activePage === 'webdev' ? 'bg-brand-500/10 text-brand-500 dark:text-accent-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-900'" 
-                            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200">Web Development</button>
+                            :class="activePage === 'webdev' ? 'bg-brand-blue text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40'" 
+                            class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200">Build Web Software</button>
                     <button @click="activePage = 'reviews'" 
-                            :class="activePage === 'reviews' ? 'bg-brand-500/10 text-brand-500 dark:text-accent-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-900'" 
-                            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200">Reviews</button>
+                            :class="activePage === 'reviews' ? 'bg-brand-blue text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40'" 
+                            class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200">Client Stories</button>
                     <button @click="activePage = 'contact'" 
-                            :class="activePage === 'contact' ? 'bg-brand-500/10 text-brand-500 dark:text-accent-500' : 'text-slate-600 dark:text-slate-300 hover:text-brand-500 dark:hover:text-accent-500 hover:bg-slate-100 dark:hover:bg-slate-900'" 
-                            class="px-4 py-2 rounded-xl text-sm font-semibold transition-all duration-200">Contact</button>
+                            :class="activePage === 'contact' ? 'bg-brand-blue text-white shadow-md' : 'text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-slate-800/40'" 
+                            class="px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider transition-all duration-200">Contact</button>
                 </nav>
 
-                <!-- Action Button Cluster -->
-                <div class="hidden md:flex items-center space-x-4">
-                    <!-- Theme Toggle -->
+                <!-- Quick Theme Toggle & CTAs -->
+                <div class="hidden lg:flex items-center space-x-4">
                     <button @click="darkMode = !darkMode" 
-                            class="p-2.5 rounded-xl border transition-colors duration-200"
-                            :class="darkMode ? 'bg-slate-900 border-slate-800 text-slate-300 hover:text-white hover:bg-slate-850' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'"
+                            class="p-2.5 rounded-xl border transition-all duration-300"
+                            :class="darkMode ? 'bg-slate-900 border-slate-800 text-brand-green hover:bg-slate-850' : 'bg-slate-100 border-slate-200 text-slate-700 hover:bg-slate-200'"
                             aria-label="Toggle Theme">
                         <i x-show="!darkMode" class="fas fa-moon text-base"></i>
                         <i x-show="darkMode" class="fas fa-sun text-base" x-cloak></i>
                     </button>
 
                     <button @click="activePage = 'contact'" 
-                            class="bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white font-bold text-xs uppercase tracking-wide px-5 py-3 rounded-xl transition-all shadow-md shadow-brand-500/10 hover:shadow-lg hover:-translate-y-0.5 transform duration-200">
-                        Get Estimate
+                            class="relative overflow-hidden bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white font-bold text-xs uppercase tracking-wider px-5 py-3 rounded-lg transition-all shadow-md hover:scale-[1.02] active:scale-[0.98] transform duration-200">
+                        Launch Inquiry
                     </button>
                 </div>
 
-                <!-- Mobile Menu Button and Toggle Toggle -->
-                <div class="flex items-center space-x-2 md:hidden">
-                    <button @click="darkMode = !darkMode" class="p-2 rounded-xl transition-colors" :class="darkMode ? 'text-slate-300 hover:bg-slate-900' : 'text-slate-700 hover:bg-slate-100'">
+                <!-- Mobile Navigation Button Drawer -->
+                <div class="flex items-center space-x-2 lg:hidden">
+                    <button @click="darkMode = !darkMode" class="p-2.5 rounded-xl transition-colors border" :class="darkMode ? 'text-brand-green bg-slate-900 border-slate-800' : 'text-slate-750 bg-slate-100 border-slate-200'">
                         <i x-show="!darkMode" class="fas fa-moon"></i>
                         <i x-show="darkMode" class="fas fa-sun" x-cloak></i>
                     </button>
-                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-xl transition-colors" :class="darkMode ? 'text-slate-300 hover:bg-slate-900' : 'text-slate-700 hover:bg-slate-100'" aria-label="Open Menu">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2.5 rounded-xl transition-colors border" :class="darkMode ? 'text-slate-350 bg-slate-900 border-slate-800' : 'text-slate-750 bg-slate-100 border-slate-200'" aria-label="Open Mobile Menu">
                         <i :class="mobileMenuOpen ? 'fas fa-times text-xl' : 'fas fa-bars text-xl'"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <!-- Mobile Navigation Menu -->
+        <!-- Mobile Dynamic Drawer Menu -->
         <div x-show="mobileMenuOpen" 
              x-transition:enter="transition ease-out duration-200" 
              x-transition:enter-start="opacity-0 scale-95" 
@@ -253,260 +333,260 @@
              x-transition:leave="transition ease-in duration-100" 
              x-transition:leave-start="opacity-100 scale-100" 
              x-transition:leave-end="opacity-0 scale-95" 
-             class="md:hidden border-t" 
-             :class="darkMode ? 'bg-slate-950 border-slate-900' : 'bg-white border-slate-200'" x-cloak>
+             class="lg:hidden border-t" 
+             :class="darkMode ? 'bg-obsidian border-slate-900' : 'bg-white border-slate-200'" x-cloak>
             <div class="px-4 pt-3 pb-6 space-y-2">
-                <button @click="activePage = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-semibold" :class="activePage === 'home' ? 'bg-brand-500/10 text-brand-500' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Home</button>
-                <button @click="activePage = 'recruitment'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-semibold" :class="activePage === 'recruitment' ? 'bg-brand-500/10 text-brand-500' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Recruitment</button>
-                <button @click="activePage = 'webdev'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-semibold" :class="activePage === 'webdev' ? 'bg-brand-500/10 text-brand-500' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Web Development</button>
-                <button @click="activePage = 'reviews'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-semibold" :class="activePage === 'reviews' ? 'bg-brand-500/10 text-brand-500' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Reviews</button>
-                <button @click="activePage = 'contact'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-semibold" :class="activePage === 'contact' ? 'bg-brand-500/10 text-brand-500' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Contact</button>
-                <button @click="activePage = 'contact'; mobileMenuOpen = false" class="w-full mt-4 bg-gradient-to-r from-brand-600 to-accent-600 text-white font-bold py-3.5 px-4 rounded-xl text-center block text-sm tracking-wide">
-                    GET ESTIMATE
+                <button @click="activePage = 'home'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-bold uppercase text-xs tracking-wider" :class="activePage === 'home' ? 'bg-brand-blue/15 text-brand-blue' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Home</button>
+                <button @click="activePage = 'recruitment'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-bold uppercase text-xs tracking-wider" :class="activePage === 'recruitment' ? 'bg-brand-blue/15 text-brand-blue' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Connect Sourcing</button>
+                <button @click="activePage = 'webdev'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-bold uppercase text-xs tracking-wider" :class="activePage === 'webdev' ? 'bg-brand-blue/15 text-brand-blue' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Build Web Software</button>
+                <button @click="activePage = 'reviews'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-bold uppercase text-xs tracking-wider" :class="activePage === 'reviews' ? 'bg-brand-blue/15 text-brand-blue' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Client Stories</button>
+                <button @click="activePage = 'contact'; mobileMenuOpen = false" class="block w-full text-left px-4 py-3 rounded-xl font-bold uppercase text-xs tracking-wider" :class="activePage === 'contact' ? 'bg-brand-blue/15 text-brand-blue' : 'hover:bg-slate-100 dark:hover:bg-slate-900'">Contact</button>
+                <button @click="activePage = 'contact'; mobileMenuOpen = false" class="w-full mt-4 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white font-bold py-3 px-4 rounded-xl text-center block text-xs tracking-wider uppercase">
+                    Launch Inquiry
                 </button>
             </div>
         </div>
     </header>
 
-    <!-- Main Content Dynamic Container -->
-    <main class="flex-grow">
+    <!-- Main Dynamic Frame -->
+    <main class="flex-grow relative z-10">
 
         <!-- ================= HOME PAGE ================= -->
-        <div x-show="activePage === 'home'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-[0.99]" x-transition:enter-end="transform opacity-100 scale-100" class="space-y-24 pb-20">
-            <!-- Hero Section -->
-            <section class="relative overflow-hidden pt-12 md:pt-24 lg:pt-32 pb-16">
-                <!-- Background Glow Elements matching Logo theme -->
-                <div class="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-500/15 dark:bg-brand-500/10 rounded-full blur-[120px] pointer-events-none"></div>
-                <div class="absolute bottom-10 right-10 w-[350px] h-[350px] bg-accent-500/15 dark:bg-accent-500/10 rounded-full blur-[90px] pointer-events-none"></div>
-
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                        <div class="lg:col-span-7 text-left">
-                            <!-- Pill Tag -->
-                            <span class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold tracking-wider uppercase border mb-6"
-                                  :class="darkMode ? 'bg-brand-500/10 text-brand-300 border-brand-500/20' : 'bg-brand-50 text-brand-700 border-brand-100'">
-                                <span class="w-2.5 h-2.5 rounded-full bg-accent-500 animate-pulse"></span> Dual-Force Agency
+        <div x-show="activePage === 'home'" x-transition:enter="transition ease-out duration-300" class="space-y-24 pb-20">
+            
+            <!-- Hero Segment -->
+            <section class="relative pt-12 md:pt-20 lg:pt-28 pb-16">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-center lg:text-left">
+                        
+                        <!-- Left Hero Messaging Column -->
+                        <div class="lg:col-span-7 space-y-6">
+                            <span class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase border"
+                                  data-aos="fade-down"
+                                  :class="darkMode ? 'bg-brand-blue/10 text-brand-green border-brand-blue/20' : 'bg-blue-50 text-brand-blue border-blue-100'">
+                                <span class="w-2 h-2 rounded-full bg-brand-green animate-pulse"></span> Dual-Force Corporate Ecosystem
                             </span>
 
-                            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6"
+                            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1]"
+                                data-aos="fade-up" data-aos-delay="100"
                                 :class="darkMode ? 'text-white' : 'text-slate-900'">
-                                Sourcing <span class="bg-gradient-to-r from-brand-500 via-cyan-400 to-accent-500 bg-clip-text text-transparent">Elite Engineers</span><br>
-                                & building <span class="bg-gradient-to-r from-accent-500 to-brand-500 bg-clip-text text-transparent">High-Speed</span> web systems
+                                Build the Future.<br>
+                                <span class="bg-gradient-to-r from-brand-blue via-brand-green to-brand-green bg-clip-text text-transparent">Connect the Talent.</span><br>
+                                Scale Your Venture.
                             </h1>
                             
-                            <p class="max-w-2xl text-base sm:text-lg lg:text-xl mb-10 leading-relaxed font-medium"
+                            <p class="max-w-2xl mx-auto lg:mx-0 text-sm sm:text-base lg:text-lg font-medium leading-relaxed"
+                               data-aos="fade-up" data-aos-delay="200"
                                :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
-                                Scale your technology goals seamlessly. We source pre-vetted engineers to expand your corporate capacity, while handcrafting stunning static sites designed for peak PageSpeed.
+                                NarmiTech fuses world-class technical talent acquisition with high-speed static web architectural designs. We source elite software engineers while crafting robust modern software portals to fast-track your conversion pipeline.
                             </p>
 
-                            <div class="flex flex-col sm:flex-row items-center gap-4 max-w-md">
-                                <button @click="activePage = 'recruitment'" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white font-bold text-sm rounded-xl transition-all shadow-lg shadow-brand-500/15 hover:shadow-brand-500/30 hover:-translate-y-0.5 duration-200">
-                                    Hire Top Talent <i class="fas fa-user-tie ml-2"></i>
+                            <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 max-w-md mx-auto lg:mx-0"
+                                 data-aos="fade-up" data-aos-delay="300">
+                                <button @click="activePage = 'recruitment'" class="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white font-extrabold text-xs uppercase tracking-wider rounded-xl transition-all shadow-lg hover:scale-[1.03] duration-200">
+                                    Source Talent <i class="fas fa-user-plus ml-2 text-brand-green"></i>
                                 </button>
                                 <button @click="activePage = 'webdev'" 
-                                        class="w-full sm:w-auto px-8 py-4 font-bold text-sm rounded-xl border transition-all hover:-translate-y-0.5 duration-200"
-                                        :class="darkMode ? 'bg-slate-900 border-slate-800 text-white hover:bg-slate-850' : 'bg-white border-slate-200 text-slate-800 hover:bg-slate-50 shadow-sm'">
-                                    Build Website <i class="fas fa-laptop-code ml-2"></i>
+                                        class="w-full sm:w-auto px-8 py-4 font-extrabold text-xs uppercase tracking-wider rounded-xl border transition-all hover:scale-[1.03] duration-200"
+                                        :class="darkMode ? 'bg-slate-900 border-slate-800 text-white hover:bg-slate-850' : 'bg-white border-slate-300 text-slate-850 hover:bg-slate-50 shadow-sm'">
+                                    Build Platform <i class="fas fa-layer-group ml-2 text-brand-blue"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Hero Brand Logo Showcase Frame -->
-                        <div class="lg:col-span-5 flex justify-center">
-                            <div class="relative group p-4 rounded-3xl border border-slate-200/50 dark:border-slate-800/80 bg-slate-950/40 backdrop-blur shadow-2xl overflow-hidden w-full max-w-sm">
-                                <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-accent-500 rounded-3xl opacity-30 blur group-hover:opacity-50 transition duration-1000"></div>
-                                <div class="relative bg-slate-950 p-6 rounded-2xl">
-                                    <div class="aspect-video w-full rounded-xl overflow-hidden relative border border-slate-800 mb-6 bg-slate-900 flex items-center justify-center">
-                                        <img src="narmi.jpeg" alt="NarmiTech Corporate Logo Concept" class="w-full h-full object-cover">
+                        <!-- Right Graphic Identity Column (Incorporating narmi.jpeg beautifully as master element) -->
+                        <div class="lg:col-span-5 flex justify-center" data-aos="fade-left" data-aos-delay="200">
+                            <div class="relative group max-w-md w-full">
+                                <div class="absolute inset-0 bg-gradient-to-tr from-brand-blue to-brand-green rounded-3xl blur-2xl opacity-35 group-hover:opacity-45 transition-opacity duration-500"></div>
+                                <div class="relative rounded-3xl p-1.5 bg-gradient-to-tr from-brand-blue via-slate-800 to-brand-green transition-transform duration-500 group-hover:scale-[1.01] overflow-hidden">
+                                    <div class="rounded-[22px] overflow-hidden bg-obsidian-950 flex justify-center items-center">
+                                        <!-- Verify the presence of narmi.jpeg inside visual element -->
+                                        <img src="narmi.jpeg" alt="NarmiTech Corporate Brand Logo Visual" class="w-full h-auto object-cover transform duration-700 group-hover:scale-105">
                                     </div>
-                                    <div class="text-center space-y-2">
-                                        <div class="text-xs font-bold uppercase tracking-widest text-accent-500">Official Brand Identity</div>
-                                        <h3 class="text-xl font-bold text-white">NarmiTech Pvt Ltd</h3>
-                                        <p class="text-xs text-slate-400">"Build. Connect. Scale."</p>
-                                        <div class="flex justify-center space-x-2 pt-2">
-                                            <span class="w-3 h-3 rounded-full bg-brand-500"></span>
-                                            <span class="w-3 h-3 rounded-full bg-sky-400"></span>
-                                            <span class="w-3 h-3 rounded-full bg-accent-500"></span>
+                                    <!-- Embedded Floating Stats Banner -->
+                                    <div class="absolute bottom-4 left-4 right-4 bg-slate-900/90 dark:bg-obsidian/90 backdrop-blur-md rounded-2xl p-4 border border-slate-700/50 flex justify-between items-center text-left">
+                                        <div>
+                                            <span class="block text-xl font-extrabold text-white">99.8%</span>
+                                            <span class="block text-[9px] uppercase tracking-wider text-brand-green font-bold">First-Sourced Retention</span>
+                                        </div>
+                                        <div class="w-px h-10 bg-slate-700/50"></div>
+                                        <div>
+                                            <span class="block text-xl font-extrabold text-white">100/100</span>
+                                            <span class="block text-[9px] uppercase tracking-wider text-brand-blue font-bold">AOS & PageSpeed Target</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
 
-                    <!-- Trust Stat Banner -->
-                    <div class="mt-20 pt-10 border-t max-w-4xl mx-auto"
-                         :class="darkMode ? 'border-slate-900' : 'border-slate-200'">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                            <div>
-                                <span class="block text-3xl sm:text-4xl font-black text-brand-500 dark:text-accent-500">14 Days</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Average Fill Time</span>
+                    <!-- Sourcing Success Metrics -->
+                    <div class="mt-24 pt-10 border-t max-w-5xl mx-auto"
+                         data-aos="fade-up" data-aos-delay="400"
+                         :class="darkMode ? 'border-slate-900/80' : 'border-slate-200'">
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                            <div class="p-6 rounded-2xl border transition-all" 
+                                 data-aos="fade-up" data-aos-delay="100"
+                                 :class="darkMode ? 'bg-slate-900/40 border-slate-850':'bg-white border-slate-200/80 shadow-sm'">
+                                <span class="block text-3xl sm:text-4xl font-black text-brand-blue">14 Days</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-350 mt-1 block">Avg Sourcing Speed</span>
                             </div>
-                            <div>
-                                <span class="block text-3xl sm:text-4xl font-black text-accent-500">100/100</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">PageSpeed Score</span>
+                            <div class="p-6 rounded-2xl border transition-all" 
+                                 data-aos="fade-up" data-aos-delay="200"
+                                 :class="darkMode ? 'bg-slate-900/40 border-slate-850':'bg-white border-slate-200/80 shadow-sm'">
+                                <span class="block text-3xl sm:text-4xl font-black text-brand-green">&lt; 3.2s</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-350 mt-1 block">Static Load Standard</span>
                             </div>
-                            <div>
-                                <span class="block text-3xl sm:text-4xl font-black text-brand-500 dark:text-accent-500">60+</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Brands Scaled</span>
+                            <div class="p-6 rounded-2xl border transition-all" 
+                                 data-aos="fade-up" data-aos-delay="300"
+                                 :class="darkMode ? 'bg-slate-900/40 border-slate-850':'bg-white border-slate-200/80 shadow-sm'">
+                                <span class="block text-3xl sm:text-4xl font-black text-brand-blue">120+</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-350 mt-1 block">Global Tech Launches</span>
                             </div>
-                            <div>
-                                <span class="block text-3xl sm:text-4xl font-black text-accent-500">4.9 ★</span>
-                                <span class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">Client Rating</span>
+                            <div class="p-6 rounded-2xl border transition-all" 
+                                 data-aos="fade-up" data-aos-delay="400"
+                                 :class="darkMode ? 'bg-slate-900/40 border-slate-850':'bg-white border-slate-200/80 shadow-sm'">
+                                <span class="block text-3xl sm:text-4xl font-black text-brand-green">99.2%</span>
+                                <span class="text-[9px] font-bold uppercase tracking-widest text-slate-400 dark:text-slate-350 mt-1 block">Client Satisfaction</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Trusted By Logos -->
-            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p class="text-xs font-extrabold uppercase tracking-widest mb-6" :class="darkMode ? 'text-slate-500' : 'text-slate-400'">Empowering Teams Worldwide</p>
-                <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60 dark:opacity-40" :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
-                    <span class="text-lg font-black tracking-wider"><i class="fab fa-amazon mr-2 text-brand-500"></i>AMAZONAS</span>
-                    <span class="text-lg font-black tracking-wider"><i class="fab fa-spotify mr-2 text-accent-500"></i>SOUNDIFY</span>
-                    <span class="text-lg font-black tracking-wider"><i class="fab fa-stripe mr-2 text-brand-500"></i>STRIPEPAY</span>
-                    <span class="text-lg font-black tracking-wider"><i class="fab fa-salesforce mr-2 text-accent-500"></i>FORCEFLOW</span>
+            <!-- Corporate Partners Banner -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center" data-aos="fade-up" data-aos-delay="100">
+                <p class="text-xs font-extrabold uppercase tracking-widest mb-6" :class="darkMode ? 'text-slate-500' : 'text-slate-400'">Engineered Scalability for Industry Leaders</p>
+                <div class="flex flex-wrap items-center justify-center gap-8 md:gap-16 opacity-75 dark:opacity-40" :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
+                    <span class="text-sm font-extrabold tracking-wider"><i class="fab fa-stripe mr-2"></i>STRIPE INTEGRATION</span>
+                    <span class="text-sm font-extrabold tracking-wider"><i class="fab fa-aws mr-2"></i>AWS ECOSYSTEM</span>
+                    <span class="text-sm font-extrabold tracking-wider"><i class="fab fa-github mr-2"></i>DEVOPS SYSTEM</span>
+                    <span class="text-sm font-extrabold tracking-wider"><i class="fab fa-cloudflare mr-2"></i>FAST CLOUDFLARE</span>
                 </div>
             </section>
 
-            <!-- Service Synergy Section -->
+            <!-- The Unified Service Synergy -->
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center max-w-3xl mx-auto mb-16">
-                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-4" :class="darkMode ? 'text-white' : 'text-slate-900'">Our Two-Pillar Synergy</h2>
-                    <p class="text-sm sm:text-base leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                        Stop managing separate developers and staffing firms. We operate at the intersection of team assembly and premium, highly responsive custom build engineering.
+                <div class="text-center max-w-3xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-4" :class="darkMode ? 'text-white' : 'text-slate-900'">Two Pillars, One Execution Blueprint</h2>
+                    <p class="text-sm sm:text-base leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">
+                        We operate at the technical intersection of elite candidate placements and modern decoupled static web deployments. We provide you both under one coordinated, high-performance project workflow.
                     </p>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-                    <!-- Pillar 1: Talent Sourcing -->
+                    <!-- Sourcing Card -->
                     <div class="group relative rounded-3xl p-8 sm:p-10 border transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
-                         :class="darkMode ? 'bg-slate-900/40 border-slate-800 hover:border-brand-500/50 hover:bg-slate-900' : 'bg-white border-slate-200 hover:border-brand-500/30 shadow-md hover:shadow-xl'">
+                         data-aos="fade-up" data-aos-delay="100"
+                         :class="darkMode ? 'bg-slate-900/40 border-slate-850 hover:border-brand-blue hover:bg-slate-900' : 'bg-white border-slate-200 hover:border-brand-blue/30 shadow-sm hover:shadow-xl'">
                         <div>
                             <div class="flex items-center justify-between mb-8">
-                                <div class="w-14 h-14 rounded-2xl bg-brand-500/10 text-brand-600 dark:text-brand-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-users-cog"></i>
+                                <div class="w-14 h-14 rounded-2xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-network-wired"></i>
                                 </div>
-                                <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full" :class="darkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-700'">Recruitment</span>
+                                <span class="text-[9px] font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full" :class="darkMode ? 'bg-slate-800 text-brand-green' : 'bg-slate-100 text-brand-blue'">Connect Talent</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-3" :class="darkMode ? 'text-white' : 'text-slate-900'">Technical Recruitment</h3>
-                            <p class="text-sm mb-6 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                                Skip the resume sifting. We pre-vet elite frontend, backend, mobile developers, and designer talent through customized live-coding challenges.
+                            <h3 class="text-2xl font-bold mb-3" :class="darkMode ? 'text-white' : 'text-slate-900'">Elite Tech Recruitment</h3>
+                            <p class="text-sm mb-6 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">
+                                Eliminate candidate screening overhead. We secure high-performance design specialists, software engineering leads, and DevOps engineers optimized specifically for your tech-stack parameters.
                             </p>
-                            <ul class="space-y-3 mb-8 text-sm font-medium" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                                <li class="flex items-center"><i class="fas fa-check text-brand-500 mr-3"></i> Dedicated technical screening tests</li>
-                                <li class="flex items-center"><i class="fas fa-check text-brand-500 mr-3"></i> First shortlist delivered within 72 hours</li>
-                                <li class="flex items-center"><i class="fas fa-check text-brand-500 mr-3"></i> Comprehensive 90-day retention guarantee</li>
+                            <ul class="space-y-3 mb-8 text-sm font-semibold" :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
+                                <li class="flex items-center"><i class="fas fa-check text-brand-green mr-3"></i> Screened coding assessments</li>
+                                <li class="flex items-center"><i class="fas fa-check text-brand-green mr-3"></i> Initial candidate profiles within 72 hours</li>
+                                <li class="flex items-center"><i class="fas fa-check text-brand-green mr-3"></i> 90-day comprehensive safety backup terms</li>
                             </ul>
                         </div>
-                        <button @click="activePage = 'recruitment'" class="text-brand-500 dark:text-accent-500 font-bold text-sm inline-flex items-center group-hover:translate-x-1 transition-all">
-                            Explore Recruitment Sourcing <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <button @click="activePage = 'recruitment'" class="text-brand-blue font-bold text-xs uppercase tracking-wider inline-flex items-center group-hover:translate-x-1 transition-all">
+                            Access Sourcing Pipeline <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
                         </button>
                     </div>
 
-                    <!-- Pillar 2: Web Dev Sourcing -->
+                    <!-- Web Dev Card -->
                     <div class="group relative rounded-3xl p-8 sm:p-10 border transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between"
-                         :class="darkMode ? 'bg-slate-900/40 border-slate-800 hover:border-accent-500/50 hover:bg-slate-900' : 'bg-white border-slate-200 hover:border-accent-500/30 shadow-md hover:shadow-xl'">
+                         data-aos="fade-up" data-aos-delay="250"
+                         :class="darkMode ? 'bg-slate-900/40 border-slate-850 hover:border-brand-green hover:bg-slate-900' : 'bg-white border-slate-200 hover:border-brand-green/30 shadow-sm hover:shadow-xl'">
                         <div>
                             <div class="flex items-center justify-between mb-8">
-                                <div class="w-14 h-14 rounded-2xl bg-accent-500/10 text-accent-600 dark:text-accent-400 flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                                    <i class="fas fa-code"></i>
+                                <div class="w-14 h-14 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300">
+                                    <i class="fas fa-laptop-code"></i>
                                 </div>
-                                <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full" :class="darkMode ? 'bg-slate-800 text-slate-300' : 'bg-slate-100 text-slate-700'">Static Dev</span>
+                                <span class="text-[9px] font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full" :class="darkMode ? 'bg-slate-800 text-brand-blue' : 'bg-slate-100 text-brand-green'">Build Web</span>
                             </div>
-                            <h3 class="text-2xl font-bold mb-3" :class="darkMode ? 'text-white' : 'text-slate-900'">Web Design & Building</h3>
-                            <p class="text-sm mb-6 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                                Perfect static sites built for lightning speed, supreme SEO performance, and flawless responsive sizing across mobiles, tablets, and desktops.
+                            <h3 class="text-2xl font-bold mb-3" :class="darkMode ? 'text-white' : 'text-slate-900'">Web Software Design</h3>
+                            <p class="text-sm mb-6 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">
+                                Build dynamic corporate systems, high-speed static interfaces, and modular capture panels engineered with modern web parameters (Vercel, Tailwind, lightweight frameworks).
                             </p>
-                            <ul class="space-y-3 mb-8 text-sm font-medium" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-3"></i> Modern static frameworks for zero vulnerability</li>
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-3"></i> Fully responsive dynamic widgets</li>
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-3"></i> Lighthouse optimized score with structure schema</li>
+                            <ul class="space-y-3 mb-8 text-sm font-semibold" :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
+                                <li class="flex items-center"><i class="fas fa-check text-brand-blue mr-3"></i> Handcrafted responsive CSS modules</li>
+                                <li class="flex items-center"><i class="fas fa-check text-brand-blue mr-3"></i> Advanced SEO structure schema markup</li>
+                                <li class="flex items-center"><i class="fas fa-check text-brand-blue mr-3"></i> Micro-interaction dynamic component widgets</li>
                             </ul>
                         </div>
-                        <button @click="activePage = 'webdev'" class="text-accent-500 dark:text-accent-500 font-bold text-sm inline-flex items-center group-hover:translate-x-1 transition-all">
-                            Explore Web Packages <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        <button @click="activePage = 'webdev'" class="text-brand-green font-bold text-xs uppercase tracking-wider inline-flex items-center group-hover:translate-x-1 transition-all">
+                            Review Static Solutions <i class="fas fa-arrow-right ml-2 text-[10px]"></i>
                         </button>
                     </div>
                 </div>
             </section>
 
-            <!-- Interactive Budget Calculator Section -->
+            <!-- Interactive Live Sourcing Estimator -->
             <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border transition-colors duration-300"
-                     :class="darkMode ? 'bg-slate-900 border-slate-800 text-white' : 'bg-white border-slate-200 text-slate-900 shadow-xl'">
-                    <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-500/10 dark:bg-brand-500/5 rounded-full blur-[100px] pointer-events-none"></div>
+                <div class="relative rounded-3xl p-8 sm:p-12 lg:p-16 overflow-hidden border"
+                     data-aos="fade-up"
+                     :class="darkMode ? 'bg-slate-900/80 border-slate-850 shadow-2xl' : 'bg-white border-slate-200/80 shadow-lg'">
 
-                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <span class="inline-block px-3.5 py-1.5 rounded-full font-bold text-xs uppercase tracking-widest mb-4"
-                                  :class="darkMode ? 'bg-accent-500/10 text-accent-500' : 'bg-accent-50 text-accent-700'">Interactive Estimate</span>
-                            <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight mb-6">Need an Instant Cost Estimation?</h2>
+                    <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                        <div class="lg:col-span-7">
+                            <span class="inline-block px-3.5 py-1.5 rounded-full font-extrabold text-[9px] uppercase tracking-widest mb-4"
+                                  :class="darkMode ? 'bg-brand-blue/15 text-brand-green' : 'bg-blue-50 text-brand-blue'">Dynamic Pricing</span>
+                            <h2 class="text-3xl sm:text-4xl font-black tracking-tight mb-6">Need a custom design projection?</h2>
                             <p class="text-sm sm:text-base leading-relaxed mb-8" :class="darkMode ? 'text-slate-300' : 'text-slate-600'">
-                                Select your website needs dynamically below to preview project investment instantly. Transparent flat rates, zero hidden extras, and lightning speed execution guaranteed.
+                                Select your exact technical needs inside our interactive widget. Review instantly calculated, flat-rate development sourcing costs with no unexpected overhead or hidden agency commissions.
                             </p>
                             <div class="flex flex-wrap gap-4">
-                                <button @click="activePage = 'webdev'" class="px-6 py-3.5 bg-accent-600 hover:bg-accent-500 text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md shadow-accent-500/10">
-                                    Launch Detailed Web Calculator <i class="fas fa-calculator ml-2"></i>
+                                <button @click="activePage = 'webdev'" class="px-6 py-3.5 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                                    Open Detailed Web Estimator <i class="fas fa-calculator ml-2"></i>
                                 </button>
                             </div>
                         </div>
 
-                        <!-- Right panel mini tool (Completely restored and bug-free) -->
-                        <div class="rounded-2xl p-6 sm:p-8 border transition-colors duration-300"
-                             :class="darkMode ? 'bg-slate-950/80 border-slate-800/80' : 'bg-slate-50 border-slate-200/80'">
-                            <h3 class="text-lg font-bold mb-4 flex items-center" :class="darkMode ? 'text-white' : 'text-slate-900'">
-                                <i class="fas fa-bolt text-accent-500 mr-2"></i> Quick Quote Generator
+                        <!-- Mini Estimator Widget inside Hero -->
+                        <div class="lg:col-span-5 rounded-2xl p-6 sm:p-8 border"
+                             :class="darkMode ? 'bg-obsidian border-slate-800' : 'bg-slate-50 border-slate-200/80'">
+                            <h3 class="text-sm font-extrabold mb-5 flex items-center" :class="darkMode ? 'text-white' : 'text-slate-900'">
+                                <i class="fas fa-bolt text-brand-green mr-2 animate-bounce"></i> Real-time Quote Estimator
                             </h3>
                             
                             <div class="space-y-6">
                                 <div>
-                                    <label class="block text-xs font-extrabold uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Static Pages Needed</label>
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Total Web Screens</label>
                                     <div class="flex items-center space-x-4">
-                                        <input type="range" min="1" max="10" x-model="calcPages" class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-accent-500">
-                                        <span class="text-base font-bold whitespace-nowrap text-accent-500 dark:text-accent-500" x-text="calcPages + ' pages'"></span>
+                                        <input type="range" min="1" max="15" x-model="calcPages" class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-blue">
+                                        <span class="text-sm font-extrabold whitespace-nowrap text-brand-blue" x-text="calcPages + ' screens'"></span>
                                     </div>
                                 </div>
 
-                                <div class="space-y-2">
-                                    <label class="block text-xs font-extrabold uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Features Options</label>
-                                    <div class="grid grid-cols-2 gap-3 text-xs font-semibold">
-                                        <label class="flex items-center space-x-2 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
-                                            <input type="checkbox" x-model="calcFeatures.contact" class="rounded text-brand-500 focus:ring-brand-500">
-                                            <span>Contact Form</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
-                                            <input type="checkbox" x-model="calcFeatures.blog" class="rounded text-brand-500 focus:ring-brand-500">
-                                            <span>Blog System</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
-                                            <input type="checkbox" x-model="calcFeatures.dark" class="rounded text-brand-500 focus:ring-brand-500">
-                                            <span>Dark Mode</span>
-                                        </label>
-                                        <label class="flex items-center space-x-2 p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-900 transition-colors">
-                                            <input type="checkbox" x-model="calcFeatures.seo" class="rounded text-brand-500 focus:ring-brand-500">
-                                            <span>SEO Ready</span>
-                                        </label>
-                                    </div>
+                                <div class="grid grid-cols-2 gap-2 text-xs font-semibold">
+                                    <label class="flex items-center space-x-2 p-2.5 rounded-lg border cursor-pointer transition-all"
+                                           :class="calcFeatures.blog ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'">
+                                        <input type="checkbox" x-model="calcFeatures.blog" class="rounded accent-brand-blue">
+                                        <span>Blog Hub</span>
+                                    </label>
+                                    <label class="flex items-center space-x-2 p-2.5 rounded-lg border cursor-pointer transition-all"
+                                           :class="calcFeatures.seo ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'">
+                                        <input type="checkbox" x-model="calcFeatures.seo" class="rounded accent-brand-blue">
+                                        <span>SEO Schema</span>
+                                    </label>
                                 </div>
 
-                                <div>
-                                    <label class="block text-xs font-extrabold uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Delivery Urgency</label>
-                                    <select x-model="calcUrgency" class="w-full p-2.5 rounded-xl border bg-transparent text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-brand-500" :class="darkMode ? 'border-slate-800 bg-slate-900' : 'border-slate-200 bg-white'">
-                                        <option value="relaxed" class="text-slate-900 dark:text-white">Relaxed (Discounted)</option>
-                                        <option value="standard" class="text-slate-900 dark:text-white">Standard Delivery</option>
-                                        <option value="express" class="text-slate-900 dark:text-white">Express (Premium)</option>
-                                    </select>
-                                </div>
-
-                                <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+                                <div class="pt-5 border-t flex justify-between items-center" :class="darkMode ? 'border-slate-800' : 'border-slate-200'">
                                     <div>
-                                        <span class="block text-xs font-bold text-slate-400">Estimated Price</span>
-                                        <span class="text-2xl font-black text-brand-500 dark:text-accent-500 animate-pulse" x-text="'$' + webDevQuote"></span>
+                                        <span class="block text-[9px] font-bold uppercase tracking-wider" :class="darkMode ? 'text-slate-450' : 'text-slate-500'">Est. Project Value</span>
+                                        <span class="text-2xl font-black text-brand-green">$<span x-text="webDevQuote"></span></span>
                                     </div>
-                                    <button @click="contactService='webdev'; activePage = 'contact'; showNotification('Web Development setup ready in Contact!')" class="px-4 py-2 bg-gradient-to-r from-brand-600 to-accent-600 text-white text-xs font-bold rounded-lg hover:opacity-90 transition-opacity">
-                                        Claim Quote
+                                    <button @click="activePage = 'contact'; contactService = 'webdev'" class="px-4 py-2.5 bg-brand-blue hover:bg-brand-blue-dark text-white text-[10px] font-bold uppercase tracking-wider rounded-lg transition-all">
+                                        Reserve Design
                                     </button>
                                 </div>
                             </div>
@@ -518,466 +598,736 @@
 
 
         <!-- ================= RECRUITMENT PAGE ================= -->
-        <div x-show="activePage === 'recruitment'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-[0.99]" x-transition:enter-end="transform opacity-100 scale-100" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16" x-cloak>
+        <div x-show="activePage === 'recruitment'" x-transition:enter="transition ease-out duration-300" class="space-y-24 pb-20" x-cloak>
             
             <!-- Recruitment Header -->
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4" :class="darkMode ? 'bg-brand-500/10 text-brand-300' : 'bg-brand-50 text-brand-700'">Elite Tech Placement</span>
-                <h1 class="text-4xl sm:text-5xl font-black mb-4">Scale Your Tech Brainpower</h1>
-                <p class="text-base sm:text-lg leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                    We don't match resumes—we run live engineering assessments. Sourced and fully pre-vetted engineers ready to align with your product development.
-                </p>
-            </div>
+            <section class="relative pt-16 pb-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="px-3.5 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider"
+                          data-aos="fade-down"
+                          :class="darkMode ? 'bg-brand-blue/15 text-brand-green' : 'bg-blue-50 text-brand-blue'">Connect Talent Solutions</span>
+                    <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-4 mb-6" data-aos="fade-up" data-aos-delay="100" :class="darkMode ? 'text-white' : 'text-slate-900'">Connect Elite Global Sourcing Pipelines</h1>
+                    <p class="max-w-2xl mx-auto text-sm sm:text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
+                        We bypass basic resume filtering pools. Our vetting challenges examine design practices, system architecture concepts, and live-coding speeds to match you with top talent.
+                    </p>
+                </div>
+            </section>
 
-            <!-- Recruitment Configurator Widget -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 bg-slate-900/40 border border-slate-200/20 dark:border-slate-800/80 p-8 sm:p-12 rounded-3xl backdrop-blur">
-                <div class="lg:col-span-7 space-y-6">
-                    <h3 class="text-2xl font-bold flex items-center"><i class="fas fa-sliders text-accent-500 mr-3"></i> Calculate Talent Investment</h3>
-                    <p class="text-sm" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Select your criteria to determine sourcing packages and onboarding volume.</p>
+            <!-- Vetting Parameters Selector Grid -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
                     
-                    <div class="space-y-4">
-                        <div>
-                            <label class="block text-xs font-extrabold uppercase tracking-widest mb-2">Role Specialty</label>
-                            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                                <button @click="recruitmentRole = 'designer'" :class="recruitmentRole === 'designer' ? 'bg-brand-600 border-transparent text-white' : 'bg-slate-800/40 border-slate-700 text-slate-300'" class="py-3 px-2 text-center rounded-xl font-bold text-xs uppercase border transition-all duration-200">
-                                    UI Designer
-                                </button>
-                                <button @click="recruitmentRole = 'developer'" :class="recruitmentRole === 'developer' ? 'bg-brand-600 border-transparent text-white' : 'bg-slate-800/40 border-slate-700 text-slate-300'" class="py-3 px-2 text-center rounded-xl font-bold text-xs uppercase border transition-all duration-200">
-                                    Software Dev
-                                </button>
-                                <button @click="recruitmentRole = 'manager'" :class="recruitmentRole === 'manager' ? 'bg-brand-600 border-transparent text-white' : 'bg-slate-800/40 border-slate-700 text-slate-300'" class="py-3 px-2 text-center rounded-xl font-bold text-xs uppercase border transition-all duration-200">
-                                    Tech Manager
-                                </button>
-                                <button @click="recruitmentRole = 'executive'" :class="recruitmentRole === 'executive' ? 'bg-brand-600 border-transparent text-white' : 'bg-slate-800/40 border-slate-700 text-slate-300'" class="py-3 px-2 text-center rounded-xl font-bold text-xs uppercase border transition-all duration-200">
-                                    Exec / CTO
-                                </button>
+                    <div class="lg:col-span-7 space-y-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="p-6 sm:p-8 rounded-2xl border" 
+                             :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                            <h3 class="text-lg font-bold mb-4 flex items-center text-brand-blue" :class="darkMode ? 'text-white' : 'text-slate-900'">
+                                <i class="fas fa-network-wired mr-3 text-brand-green animate-pulse"></i> Candidate Placement Sourcing Types
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-5 rounded-xl border" :class="darkMode ? 'bg-obsidian border-slate-800' : 'bg-slate-50 border-slate-200'">
+                                    <h4 class="font-bold text-sm mb-1 text-brand-blue dark:text-slate-100">Permanent Direct Staffing</h4>
+                                    <p class="text-xs leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">Secure dedicated team members for long-term roadmaps. Includes exhaustive initial vetting stages.</p>
+                                </div>
+                                <div class="p-5 rounded-xl border" :class="darkMode ? 'bg-obsidian border-slate-800' : 'bg-slate-50 border-slate-200'">
+                                    <h4 class="font-bold text-sm mb-1 text-brand-green dark:text-slate-100">Contract Staff Augmentation</h4>
+                                    <p class="text-xs leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">Evaluate coding standards, system logic, and corporate culture directly within active sprints prior to long term commit.</p>
+                                </div>
                             </div>
                         </div>
 
-                        <div>
-                            <label class="block text-xs font-extrabold uppercase tracking-widest mb-2">Number of Hires</label>
-                            <div class="flex items-center space-x-6">
-                                <input type="range" min="1" max="10" x-model="recruitmentHires" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent-500">
-                                <span class="text-xl font-bold text-accent-500 whitespace-nowrap" x-text="recruitmentHires + ' Hire(s)'"></span>
+                        <!-- Micro Info Pillars -->
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                            <div class="p-5 rounded-xl text-center border" 
+                                 data-aos="fade-up" data-aos-delay="100"
+                                 :class="darkMode ? 'bg-slate-900/20 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                                <i class="fas fa-shield-halved text-xl text-brand-blue mb-3 block"></i>
+                                <h4 class="font-bold text-xs uppercase tracking-wider" :class="darkMode ? 'text-slate-200' : 'text-slate-800'">Vetted Technical Logic</h4>
+                                <p class="text-[11px] mt-1 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Technical vetting executed by actual senior engineering directors.</p>
                             </div>
-                            <span class="text-[11px] text-accent-500 font-semibold" x-show="recruitmentHires >= 3"><i class="fas fa-tags mr-1"></i> Multi-hire 10% discount applied!</span>
+                            <div class="p-5 rounded-xl text-center border" 
+                                 data-aos="fade-up" data-aos-delay="200"
+                                 :class="darkMode ? 'bg-slate-900/20 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                                <i class="fas fa-stopwatch text-xl text-brand-green mb-3 block"></i>
+                                <h4 class="font-bold text-xs uppercase tracking-wider" :class="darkMode ? 'text-slate-200' : 'text-slate-800'">Rapid Sourcing Match</h4>
+                                <p class="text-[11px] mt-1 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Evaluate curated candidate profiles in under 48-72 business hours.</p>
+                            </div>
+                            <div class="p-5 rounded-xl text-center border" 
+                                 data-aos="fade-up" data-aos-delay="300"
+                                 :class="darkMode ? 'bg-slate-900/20 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                                <i class="fas fa-retweet text-xl text-brand-blue mb-3 block"></i>
+                                <h4 class="font-bold text-xs uppercase tracking-wider" :class="darkMode ? 'text-slate-200' : 'text-slate-800'">90-Day Fallback Terms</h4>
+                                <p class="text-[11px] mt-1 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Full replacement contract protection to safeguard direct hires.</p>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="lg:col-span-5 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-slate-800 pt-8 lg:pt-0 lg:pl-12">
-                    <div class="space-y-4">
-                        <div class="text-xs font-bold text-slate-400 uppercase tracking-widest">Sourcing Estimate</div>
-                        <div class="text-5xl font-black text-brand-500 dark:text-accent-500" x-text="'$' + recruitmentQuote"></div>
-                        <p class="text-xs leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-500'"> Includes active technical screening, complete mock performance checks, and dynamic replacement guarantee of 90 days. No upfront retainer.</p>
-                    </div>
-
-                    <button @click="contactService='recruitment'; activePage = 'contact'; showNotification('Switched service selection to Recruitment Sourcing!')" class="w-full mt-6 bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-md">
-                        Initiate Hiring Request <i class="fas fa-paper-plane ml-2"></i>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Pre-Vetted Talent Showcase Stream -->
-            <div class="space-y-6">
-                <h3 class="text-2xl font-bold flex items-center"><i class="fas fa-circle-nodes text-accent-500 mr-3"></i> Real-Time Candidate Showcase</h3>
-                <p class="text-sm text-slate-400">A sneak peek of elite candidates in our premium developer roster. Contact us immediately to schedule interviews.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <template x-for="cand in candidates" :key="cand.name">
-                        <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-5 hover:border-brand-500 dark:hover:border-accent-500 transition-all flex flex-col justify-between" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                            <div class="space-y-3">
-                                <div class="flex justify-between items-center">
-                                    <span class="text-xs font-bold px-2 py-1 rounded bg-slate-800 text-slate-300" x-text="cand.experience"></span>
-                                    <span class="text-xs font-bold text-emerald-500 flex items-center"><span class="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span> <span x-text="cand.status"></span></span>
-                                </div>
-                                <h4 class="text-lg font-bold" x-text="cand.name"></h4>
-                                <p class="text-xs text-brand-500 dark:text-accent-500 font-semibold" x-text="cand.role"></p>
-                                <div class="flex flex-wrap gap-1.5 pt-1">
-                                    <template x-for="skill in cand.skills">
-                                        <span class="text-[10px] font-bold px-2 py-0.5 rounded bg-slate-800/80 text-slate-300" x-text="skill"></span>
-                                    </template>
-                                </div>
-                            </div>
-                            <div class="border-t border-slate-800 mt-4 pt-4 flex justify-between items-center">
+                    <!-- Interactive Staffing Cost Widget -->
+                    <div class="lg:col-span-5" data-aos="fade-up" data-aos-delay="250">
+                        <div class="p-6 sm:p-8 rounded-2xl border" 
+                             :class="darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-md'">
+                            <h3 class="text-lg font-extrabold mb-6 flex items-center gap-2" :class="darkMode ? 'text-white' : 'text-slate-900'">
+                                <i class="fas fa-wallet text-brand-blue"></i> Connect Pricing Configurator
+                            </h3>
+                            
+                            <div class="space-y-6">
                                 <div>
-                                    <span class="block text-[10px] text-slate-400 uppercase font-semibold">Contract Rate</span>
-                                    <span class="text-sm font-bold" x-text="cand.hourly + '/hr'"></span>
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2.5" :class="darkMode ? 'text-slate-450' : 'text-slate-500'">Target Technical Specialty</label>
+                                    <select x-model="recruitmentRole" 
+                                            class="w-full border rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                            :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                                        <option value="designer">Senior UI/UX Specialist</option>
+                                        <option value="developer" selected>Senior Software Engineer</option>
+                                        <option value="manager">Engineering Director / Technical Lead</option>
+                                        <option value="executive">VP of Engineering / Fractional CTO</option>
+                                    </select>
                                 </div>
-                                <button @click="activePage = 'contact'; contactMessage = 'Hello, I am interested in interviewing candidate ' + cand.name + ' for the role of ' + cand.role" class="px-3 py-1.5 rounded-lg bg-brand-500 hover:bg-brand-600 text-white font-bold text-[11px] transition-colors">
-                                    Request CV
-                                </button>
+
+                                <div>
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2.5" :class="darkMode ? 'text-slate-450' : 'text-slate-500'">Hiring Headcount Requirement</label>
+                                    <div class="flex items-center space-x-4">
+                                        <input type="range" min="1" max="10" x-model="recruitmentHires" class="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-green">
+                                        <span class="text-sm font-extrabold whitespace-nowrap text-brand-green animate-pulse" x-text="recruitmentHires + ' hire(s)'"></span>
+                                    </div>
+                                    <p class="text-[11px] text-brand-green font-semibold mt-2" x-show="recruitmentHires >= 3">
+                                        <i class="fas fa-tags mr-1"></i> Multi-hire package: 15% discount applied automatically!
+                                    </p>
+                                </div>
+
+                                <div class="pt-6 border-t flex justify-between items-center" :class="darkMode ? 'border-slate-800' : 'border-slate-200'">
+                                    <div>
+                                        <span class="block text-[9px] font-bold uppercase tracking-wider" :class="darkMode ? 'text-slate-450' : 'text-slate-500'">Est. Agency Cost</span>
+                                        <span class="text-3xl font-black text-brand-blue">$<span x-text="recruitmentQuote.toLocaleString()"></span></span>
+                                    </div>
+                                    <button @click="activePage = 'contact'; contactService = 'recruitment'" class="px-5 py-3 bg-brand-blue hover:bg-brand-blue-dark text-white text-xs font-bold uppercase tracking-wider rounded-xl transition-all shadow-md">
+                                        Lock Selection
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </template>
+                    </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Sourcing Flow Methodology -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-16" data-aos="fade-up">
+                    <h2 class="text-3xl font-extrabold" :class="darkMode ? 'text-white' : 'text-slate-900'">Connect Sourcing Pipeline</h2>
+                    <p class="mt-2 text-sm text-slate-500 dark:text-slate-400">Targeted milestones from initial profiling alignments to corporate sign-off</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="relative text-center p-6 rounded-2xl bg-white/40 dark:bg-slate-900/20 backdrop-blur-sm border" :class="darkMode?'border-slate-850':'border-slate-200/50'" data-aos="fade-up" data-aos-delay="100">
+                        <div class="w-12 h-12 rounded-full bg-brand-blue text-white font-black flex items-center justify-center mx-auto text-lg mb-4 shadow-lg shadow-brand-blue/20">1</div>
+                        <h4 class="font-bold text-sm uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-200' : 'text-slate-900'">Ideal Parameter Matrix</h4>
+                        <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400">Mapping direct code stacks, salary expectations, lifestyle requirements, and engineering targets.</p>
+                    </div>
+                    <div class="relative text-center p-6 rounded-2xl bg-white/40 dark:bg-slate-900/20 backdrop-blur-sm border" :class="darkMode?'border-slate-850':'border-slate-200/50'" data-aos="fade-up" data-aos-delay="200">
+                        <div class="w-12 h-12 rounded-full font-black flex items-center justify-center mx-auto text-lg mb-4 border"
+                             :class="darkMode ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-white border-slate-200 text-slate-700 shadow-sm'">2</div>
+                        <h4 class="font-bold text-sm uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-200' : 'text-slate-900'">Vetting Assessments</h4>
+                        <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400">Ensuring clean modular constructs, optimization architecture levels, and secure system protocols.</p>
+                    </div>
+                    <div class="relative text-center p-6 rounded-2xl bg-white/40 dark:bg-slate-900/20 backdrop-blur-sm border" :class="darkMode?'border-slate-850':'border-slate-200/50'" data-aos="fade-up" data-aos-delay="300">
+                        <div class="w-12 h-12 rounded-full font-black flex items-center justify-center mx-auto text-lg mb-4 border"
+                             :class="darkMode ? 'bg-slate-900 border-slate-800 text-slate-300' : 'bg-white border-slate-200 text-slate-700 shadow-sm'">3</div>
+                        <h4 class="font-bold text-sm uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-200' : 'text-slate-900'">Background Inquiries</h4>
+                        <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400">Verifying historical sprint deliverability, communication standards, and leadership reviews.</p>
+                    </div>
+                    <div class="relative text-center p-6 rounded-2xl bg-white/40 dark:bg-slate-900/20 backdrop-blur-sm border" :class="darkMode?'border-slate-850':'border-slate-200/50'" data-aos="fade-up" data-aos-delay="400">
+                        <div class="w-12 h-12 rounded-full bg-brand-green text-white font-black flex items-center justify-center mx-auto text-lg mb-4 shadow-lg shadow-brand-green/20">4</div>
+                        <h4 class="font-bold text-sm uppercase tracking-wider mb-2" :class="darkMode ? 'text-slate-200' : 'text-slate-900'">Sprint Onboarding</h4>
+                        <p class="text-xs leading-relaxed text-slate-600 dark:text-slate-400">Drafting secure offer frameworks, completing negotiations, and tracking team transitions.</p>
+                    </div>
+                </div>
+            </section>
         </div>
 
 
         <!-- ================= WEB DEV PAGE ================= -->
-        <div x-show="activePage === 'webdev'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-[0.99]" x-transition:enter-end="transform opacity-100 scale-100" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16" x-cloak>
+        <div x-show="activePage === 'webdev'" x-transition:enter="transition ease-out duration-300" class="space-y-24 pb-20" x-cloak>
             
-            <!-- Web Dev Header -->
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4" :class="darkMode ? 'bg-accent-500/10 text-accent-500' : 'bg-accent-50 text-accent-700'">Blazing-Fast Web Systems</span>
-                <h1 class="text-4xl sm:text-5xl font-black mb-4">Speed is Our Core Strategy</h1>
-                <p class="text-base sm:text-lg leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                    Google ranks fast static architectures better. Our custom sites load instantly, block safety exploits completely, and achieve pristine core web vitals.
-                </p>
-            </div>
+            <!-- Web Software Main Headers -->
+            <section class="relative pt-16 pb-8">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="px-3.5 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider"
+                          data-aos="fade-down"
+                          :class="darkMode ? 'bg-brand-green/15 text-brand-green' : 'bg-emerald-50 text-brand-green border border-emerald-100'">Build Solutions Portal</span>
+                    <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-4 mb-6" data-aos="fade-up" data-aos-delay="100" :class="darkMode ? 'text-white' : 'text-slate-900'">Handcrafted Web Software Built to Scale</h1>
+                    <p class="max-w-2xl mx-auto text-sm sm:text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
+                        We design gorgeous, responsive, ultra-secure web interfaces, static dashboards, and landing pages built using modern system protocols for absolute execution performance.
+                    </p>
+                </div>
+            </section>
 
-            <!-- Features Showcase Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl mb-6"><i class="fas fa-gauge-high"></i></div>
-                    <h3 class="text-xl font-bold mb-3">100/100 Mobile Speed</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">No bloat. Only clean, hand-assembled code utilizing modern engines to achieve perfect scores natively.</p>
-                </div>
-                <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                    <div class="w-12 h-12 rounded-xl bg-accent-500/10 text-accent-500 flex items-center justify-center text-xl mb-6"><i class="fas fa-lock"></i></div>
-                    <h3 class="text-xl font-bold mb-3">Unbreakable Security</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">No databases to hack, no server breaches, and no system downtime. Your presence is resilient from day one.</p>
-                </div>
-                <div class="p-8 rounded-2xl border border-slate-200 dark:border-slate-800" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                    <div class="w-12 h-12 rounded-xl bg-brand-500/10 text-brand-500 flex items-center justify-center text-xl mb-6"><i class="fas fa-chart-line"></i></div>
-                    <h3 class="text-xl font-bold mb-3">Search Engine Dominance</h3>
-                    <p class="text-sm text-slate-400 leading-relaxed">Pre-bundled meta tags, JSON-LD schemas, and lighting fast index compliance ensure premium ranking performance.</p>
-                </div>
-            </div>
-
-            <!-- Deep Web-Dev Estimator Widget -->
-            <div class="border border-slate-200 dark:border-slate-800 rounded-3xl p-8 sm:p-12" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                    <div class="lg:col-span-8 space-y-8">
+            <!-- Flat-rate Web Development Packages Grid -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    
+                    <!-- Basic Starter Option -->
+                    <div class="rounded-3xl p-8 border transition-all hover:-translate-y-1 duration-300 flex flex-col justify-between"
+                         data-aos="fade-up" data-aos-delay="100"
+                         :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm hover:shadow-xl'">
                         <div>
-                            <h3 class="text-2xl font-bold mb-2">Web Design Configurator</h3>
-                            <p class="text-sm text-slate-400">Tailor your custom building package in real-time. Transparent breakdown pricing.</p>
-                        </div>
-
-                        <div class="space-y-6">
-                            <div>
-                                <div class="flex justify-between items-center mb-2">
-                                    <label class="text-xs font-extrabold uppercase tracking-widest text-slate-400">Pages Sizing Required</label>
-                                    <span class="text-sm font-bold text-brand-500 dark:text-accent-500" x-text="calcPages + ' page(s)'"></span>
-                                </div>
-                                <input type="range" min="1" max="15" x-model="calcPages" class="w-full h-1.5 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent-500">
-                                <div class="flex justify-between text-[10px] text-slate-500 mt-1">
-                                    <span>1 Page (Landing)</span>
-                                    <span>5 Pages</span>
-                                    <span>10 Pages</span>
-                                    <span>15 Pages (Enterprise)</span>
-                                </div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Essential Web Sourcing</span>
+                            <h3 class="text-2xl font-bold mt-2 text-brand-blue" :class="darkMode ? 'text-white' : 'text-slate-900'">Launch Core Page</h3>
+                            <p class="text-xs mt-2 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">Optimally curated single responsive layout equipped with clean components, custom static CSS, and contact web hooks.</p>
+                            
+                            <div class="mt-6 flex items-baseline">
+                                <span class="text-5xl font-black text-brand-blue">$599</span>
+                                <span class="text-[10px] ml-2 uppercase font-extrabold tracking-wider" :class="darkMode ? 'text-slate-500' : 'text-slate-400'">Flat Sourcing</span>
                             </div>
 
-                            <div class="space-y-3">
-                                <label class="block text-xs font-extrabold uppercase tracking-widest text-slate-400">Enhancements & Framework Integrations</label>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    <div @click="calcFeatures.contact = !calcFeatures.contact" class="p-4 rounded-xl border border-slate-800 cursor-pointer flex items-center justify-between" :class="calcFeatures.contact ? 'border-brand-500 bg-brand-500/10' : 'bg-slate-900/30'">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-envelope-open-text text-brand-500"></i>
-                                            <div>
-                                                <span class="block text-xs font-bold">Secure Contact Handling</span>
-                                                <span class="text-[10px] text-slate-500">Integrated Form endpoint</span>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check-circle" :class="calcFeatures.contact ? 'text-brand-500' : 'text-slate-800'"></i>
-                                    </div>
-
-                                    <div @click="calcFeatures.blog = !calcFeatures.blog" class="p-4 rounded-xl border border-slate-800 cursor-pointer flex items-center justify-between" :class="calcFeatures.blog ? 'border-brand-500 bg-brand-500/10' : 'bg-slate-900/30'">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-newspaper text-brand-500"></i>
-                                            <div>
-                                                <span class="block text-xs font-bold">Dynamic CMS Blog System</span>
-                                                <span class="text-[10px] text-slate-500">Fully headless Markdown CMS</span>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check-circle" :class="calcFeatures.blog ? 'text-brand-500' : 'text-slate-800'"></i>
-                                    </div>
-
-                                    <div @click="calcFeatures.dark = !calcFeatures.dark" class="p-4 rounded-xl border border-slate-800 cursor-pointer flex items-center justify-between" :class="calcFeatures.dark ? 'border-brand-500 bg-brand-500/10' : 'bg-slate-900/30'">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-circle-half-stroke text-brand-500"></i>
-                                            <div>
-                                                <span class="block text-xs font-bold">Light/Dark Mode Toggle</span>
-                                                <span class="text-[10px] text-slate-500">Cohesive switch engine</span>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check-circle" :class="calcFeatures.dark ? 'text-brand-500' : 'text-slate-800'"></i>
-                                    </div>
-
-                                    <div @click="calcFeatures.customGraphics = !calcFeatures.customGraphics" class="p-4 rounded-xl border border-slate-800 cursor-pointer flex items-center justify-between" :class="calcFeatures.customGraphics ? 'border-brand-500 bg-brand-500/10' : 'bg-slate-900/30'">
-                                        <div class="flex items-center space-x-3">
-                                            <i class="fas fa-wand-magic-sparkles text-brand-500"></i>
-                                            <div>
-                                                <span class="block text-xs font-bold">Custom SVG & Graphics</span>
-                                                <span class="text-[10px] text-slate-500">Premium visual styling assets</span>
-                                            </div>
-                                        </div>
-                                        <i class="fas fa-check-circle" :class="calcFeatures.customGraphics ? 'text-brand-500' : 'text-slate-800'"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-slate-800 pt-8 lg:pt-0 lg:pl-12 flex flex-col justify-between">
-                        <div class="space-y-4">
-                            <span class="text-xs font-extrabold uppercase tracking-widest text-slate-500">Development Cost</span>
-                            <div class="text-5xl font-black text-brand-500 dark:text-accent-500" x-text="'$' + webDevQuote"></div>
-                            <ul class="space-y-2.5 text-xs text-slate-400 font-medium">
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-2"></i> Free SSL Certificate deployment</li>
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-2"></i> Mobile/Desktop responsive optimization</li>
-                                <li class="flex items-center"><i class="fas fa-check text-accent-500 mr-2"></i> Clean structural code (Inter-connected)</li>
+                            <ul class="mt-8 space-y-4 text-xs font-semibold" :class="darkMode ? 'text-slate-300' : 'text-slate-650'">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> 1 Handcrafted Responsive Layout</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> Micro-interactions system features</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> SEO Meta-data Optimization ready</li>
+                                <li class="flex items-center text-slate-400"><i class="fas fa-times-circle mr-2.5"></i> No Dedicated Static Blog system</li>
                             </ul>
                         </div>
-                        <button @click="contactService='webdev'; activePage = 'contact'; showNotification('Pushed web quote variables to contact form!')" class="w-full mt-8 bg-gradient-to-r from-brand-600 to-accent-600 text-white font-extrabold text-xs uppercase tracking-widest py-4 rounded-xl transition-all shadow-md">
-                            Lock Estimate Package <i class="fas fa-rocket ml-2"></i>
+                        <button @click="activePage = 'contact'; contactService = 'webdev'" 
+                                class="mt-8 w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider border transition-colors duration-200"
+                                :class="darkMode ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-white' : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800'">
+                            Order Launch Package
+                        </button>
+                    </div>
+
+                    <!-- Recommended Professional Scaling Core -->
+                    <div class="rounded-3xl p-8 border-2 transition-all hover:-translate-y-1 duration-300 relative flex flex-col justify-between"
+                         data-aos="fade-up" data-aos-delay="250"
+                         :class="darkMode ? 'bg-slate-900 border-brand-blue shadow-2xl' : 'bg-white border-brand-blue shadow-xl'">
+                        <span class="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 px-4 py-1.5 bg-gradient-to-r from-brand-blue to-brand-green text-white text-[9px] font-black uppercase tracking-widest rounded-full">Best Enterprise Value</span>
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider text-brand-green">Professional System Scaling</span>
+                            <h3 class="text-2xl font-bold mt-2" :class="darkMode ? 'text-white' : 'text-slate-900'">Velocity Growth</h3>
+                            <p class="text-xs mt-2 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">A comprehensive product suite optimized with multiple structural landing templates, testimonials framework, and detailed service descriptions.</p>
+                            
+                            <div class="mt-6 flex items-baseline">
+                                <span class="text-5xl font-black text-brand-blue">$999</span>
+                                <span class="text-[10px] ml-2 uppercase font-extrabold tracking-wider" :class="darkMode ? 'text-slate-500' : 'text-slate-400'">Flat Sourcing</span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-xs font-semibold" :class="darkMode ? 'text-slate-300' : 'text-slate-650'">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> 3-5 Tailored Screen Templates</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> Exhaustive SEO metadata setups</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> Real-time Evaluation / testimonial block</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-green mr-2.5"></i> Dynamic staffing calculators embedded</li>
+                            </ul>
+                        </div>
+                        <button @click="activePage = 'contact'; contactService = 'webdev'" 
+                                class="mt-8 w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider text-white bg-gradient-to-r from-brand-blue to-brand-blue-dark transition-all shadow-md">
+                            Order Velocity Growth
+                        </button>
+                    </div>
+
+                    <!-- Custom Architecture -->
+                    <div class="rounded-3xl p-8 border transition-all hover:-translate-y-1 duration-300 flex flex-col justify-between"
+                         data-aos="fade-up" data-aos-delay="400"
+                         :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm hover:shadow-xl'">
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase tracking-wider" :class="darkMode ? 'text-slate-400' : 'text-slate-500'">Premium CMS / Markdown Integration</span>
+                            <h3 class="text-2xl font-bold mt-2 text-brand-green" :class="darkMode ? 'text-white' : 'text-slate-900'">Elite Ecosystem</h3>
+                            <p class="text-xs mt-2 leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">Fully custom corporate framework containing custom static content databases, advanced tracking APIs, and secure serverless hooks.</p>
+                            
+                            <div class="mt-6 flex items-baseline">
+                                <span class="text-5xl font-black text-brand-green">$1,699</span>
+                                <span class="text-[10px] ml-2 uppercase font-extrabold tracking-wider" :class="darkMode ? 'text-slate-500' : 'text-slate-400'">Flat Sourcing</span>
+                            </div>
+
+                            <ul class="mt-8 space-y-4 text-xs font-semibold" :class="darkMode ? 'text-slate-300' : 'text-slate-655'">
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-blue mr-2.5"></i> Unlimited Built Static Screens</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-blue mr-2.5"></i> Decoupled Blog integration structures</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-blue mr-2.5"></i> Full custom visual icons packages</li>
+                                <li class="flex items-center"><i class="fas fa-check-circle text-brand-blue mr-2.5"></i> 60-day premium maintenance terms</li>
+                            </ul>
+                        </div>
+                        <button @click="activePage = 'contact'; contactService = 'webdev'" 
+                                class="mt-8 w-full py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider border transition-colors duration-200"
+                                :class="darkMode ? 'bg-slate-900 hover:bg-slate-800 border-slate-800 text-white' : 'bg-slate-100 hover:bg-slate-200 border-slate-200 text-slate-800'">
+                            Order Elite Package
                         </button>
                     </div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Detailed Interactive Cost Configurator -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="rounded-3xl p-8 sm:p-12 border transition-all"
+                     :class="darkMode ? 'bg-slate-900/80 border-slate-800 shadow-2xl' : 'bg-white border-slate-200/80 shadow-lg'">
+                    <div class="text-center max-w-2xl mx-auto mb-12">
+                        <h2 class="text-3xl font-extrabold text-slate-900 dark:text-white">Build Cost Calculator</h2>
+                        <p class="mt-2 text-sm text-slate-550 dark:text-slate-400">Specify your exact project screen counts and integration features below</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                        <!-- Controls Side -->
+                        <div class="space-y-6">
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2.5 text-slate-500 dark:text-slate-400 font-extrabold">Total Web Screens Volume</label>
+                                <div class="flex items-center justify-between gap-6">
+                                    <input type="range" min="1" max="15" x-model="calcPages" class="w-2/3 h-1.5 bg-slate-200 dark:bg-slate-800 rounded-lg appearance-none cursor-pointer accent-brand-blue">
+                                    <span class="text-sm font-extrabold text-brand-blue whitespace-nowrap" x-text="calcPages + ' page(s)'"></span>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-3 text-slate-500 dark:text-slate-400 font-extrabold">Optional Feature Integration</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <label class="flex items-center space-x-3 p-3.5 rounded-xl border cursor-pointer transition-all"
+                                           :class="calcFeatures.blog ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'">
+                                        <input type="checkbox" x-model="calcFeatures.blog" class="rounded accent-brand-blue">
+                                        <div>
+                                            <span class="block text-xs font-bold">Dynamic CMS Blog</span>
+                                            <span class="block text-[9px] uppercase font-bold text-slate-450 dark:text-brand-green">+$200</span>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3.5 rounded-xl border cursor-pointer transition-all"
+                                           :class="calcFeatures.dark ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'">
+                                        <input type="checkbox" x-model="calcFeatures.dark" class="rounded accent-brand-blue">
+                                        <div>
+                                            <span class="block text-xs font-bold">Light/Dark Toggles</span>
+                                            <span class="block text-[9px] uppercase font-bold text-slate-455 dark:text-brand-green">+$100</span>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3.5 rounded-xl border cursor-pointer transition-all"
+                                           :class="calcFeatures.customGraphics ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'">
+                                        <input type="checkbox" x-model="calcFeatures.customGraphics" class="rounded accent-brand-blue">
+                                        <div>
+                                            <span class="block text-xs font-bold">Unique Branding Assets</span>
+                                            <span class="block text-[9px] uppercase font-bold text-slate-455 dark:text-brand-green">+$150</span>
+                                        </div>
+                                    </label>
+                                    <label class="flex items-center space-x-3 p-3.5 rounded-xl border cursor-pointer transition-all"
+                                           :class="calcFeatures.seo ? 'bg-brand-blue/10 border-brand-blue/50 text-brand-blue' : 'bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300'">
+                                        <input type="checkbox" x-model="calcFeatures.seo" class="rounded accent-brand-blue">
+                                        <div>
+                                            <span class="block text-xs font-bold">Pro-SEO Meta Package</span>
+                                            <span class="block text-[9px] uppercase font-bold text-slate-455 dark:text-brand-green">+$120</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2.5 text-slate-500 dark:text-slate-400">Launch Timeline Urgency</label>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <label class="text-center p-3 rounded-xl border cursor-pointer block transition-all" 
+                                           :class="calcUrgency === 'relaxed' ? 'bg-brand-blue/10 border-brand-blue text-brand-blue' : 'bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'">
+                                        <input type="radio" value="relaxed" x-model="calcUrgency" class="sr-only">
+                                        <span class="block font-bold text-xs uppercase">Relaxed</span>
+                                        <span class="block text-[9px] font-bold mt-0.5 text-brand-green">-$60 Discount</span>
+                                    </label>
+                                    <label class="text-center p-3 rounded-xl border cursor-pointer block transition-all" 
+                                           :class="calcUrgency === 'standard' ? 'bg-brand-blue/10 border-brand-blue text-brand-blue' : 'bg-white dark:bg-slate-955 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'">
+                                        <input type="radio" value="standard" x-model="calcUrgency" class="sr-only">
+                                        <span class="block font-bold text-xs uppercase">Standard</span>
+                                        <span class="block text-[9px] text-slate-400 mt-0.5">Regular terms</span>
+                                    </label>
+                                    <label class="text-center p-3 rounded-xl border cursor-pointer block transition-all" 
+                                           :class="calcUrgency === 'express' ? 'bg-brand-blue/10 border-brand-blue text-brand-blue' : 'bg-white dark:bg-slate-955 border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400'">
+                                        <input type="radio" value="express" x-model="calcUrgency" class="sr-only">
+                                        <span class="block font-bold text-xs uppercase">Express</span>
+                                        <span class="block text-[9px] font-bold mt-0.5 text-rose-500">+$300 Priority</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Summary Side -->
+                        <div class="flex flex-col justify-between p-6 sm:p-8 rounded-2xl border" 
+                             :class="darkMode ? 'bg-slate-950 border-slate-800' : 'bg-slate-50 border-slate-200'">
+                            <div>
+                                <h4 class="font-extrabold text-sm uppercase tracking-wider mb-4 text-slate-900 dark:text-white">Estimated Project Composition</h4>
+                                <ul class="space-y-3.5 text-xs font-semibold text-slate-600 dark:text-slate-350">
+                                    <li class="flex justify-between">
+                                        <span>Starter Sourcing Baseline:</span>
+                                        <span class="font-bold text-slate-900 dark:text-white">$599</span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcPages > 1">
+                                        <span x-text="'Additional pages (' + (calcPages - 1) + '):'"></span>
+                                        <span class="font-bold text-slate-900 dark:text-white" x-text="'+$' + (calcPages - 1) * 90"></span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcFeatures.blog">
+                                        <span>Dynamic CMS Blog Integration:</span>
+                                        <span class="font-bold text-brand-green">+$200</span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcFeatures.dark">
+                                        <span>Light/Dark Layout Toggle:</span>
+                                        <span class="font-bold text-brand-green">+$100</span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcFeatures.customGraphics">
+                                        <span>Unique Branding Assets Design:</span>
+                                        <span class="font-bold text-brand-green">+$150</span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcFeatures.seo">
+                                        <span>Metadata SEO Configuration:</span>
+                                        <span class="font-bold text-brand-green">+$120</span>
+                                    </li>
+                                    <li class="flex justify-between" x-show="calcUrgency !== 'standard'">
+                                        <span>Urgency Timeline offset:</span>
+                                        <span class="font-bold text-rose-500" x-text="calcUrgency === 'express' ? '+$300' : '-$60'"></span>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="pt-6 border-t mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-slate-200 dark:border-slate-800">
+                                <div>
+                                    <span class="block text-[10px] font-bold uppercase tracking-wider text-slate-450">Estimated Package Cost</span>
+                                    <span class="text-4xl font-extrabold text-brand-green animate-pulse">$<span x-text="webDevQuote"></span></span>
+                                </div>
+                                <button @click="activePage = 'contact'; contactService = 'webdev'" class="w-full sm:w-auto px-6 py-3.5 bg-brand-blue hover:bg-brand-blue-dark text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                                    Initiate Project <i class="fas fa-rocket ml-2"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
         </div>
 
 
         <!-- ================= REVIEWS PAGE ================= -->
-        <div x-show="activePage === 'reviews'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-[0.99]" x-transition:enter-end="transform opacity-100 scale-100" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12" x-cloak>
+        <div x-show="activePage === 'reviews'" x-transition:enter="transition ease-out duration-300" class="space-y-20 pb-20" x-cloak>
             
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4" :class="darkMode ? 'bg-brand-500/10 text-brand-300' : 'bg-brand-50 text-brand-700'">Verified Feedback</span>
-                <h1 class="text-4xl sm:text-5xl font-black mb-4">What Our Partners Say</h1>
-                <p class="text-base sm:text-lg leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                    Our double-force strategy has delivered massive gains for operations world-wide. Read our client success reports below.
-                </p>
-            </div>
+            <!-- Testimonials Title Segment -->
+            <section class="relative pt-16 pb-4">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="px-3.5 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider"
+                          data-aos="fade-down"
+                          :class="darkMode ? 'bg-brand-blue/15 text-brand-green' : 'bg-blue-50 text-brand-blue'">Corporate Success Stories</span>
+                    <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-4 mb-4" data-aos="fade-up" data-aos-delay="100" :class="darkMode ? 'text-white' : 'text-slate-900'">Verified Partner Evaluations</h1>
+                    <p class="max-w-2xl mx-auto text-sm sm:text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
+                        Explore honest insights from global software directors who expanded their dev staffing structures and deployed modern static web assets via NarmiTech.
+                    </p>
+                </div>
+            </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <!-- Submit a Review Form -->
-                <div class="lg:col-span-4 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 sm:p-8" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                    <h3 class="text-xl font-bold mb-4 flex items-center"><i class="fas fa-comment-dots text-accent-500 mr-2"></i> Submit Your Review</h3>
-                    <form @submit.prevent="addReview()" class="space-y-4 text-xs font-semibold">
-                        <div>
-                            <label class="block mb-1 text-slate-400">Your Full Name</label>
-                            <input type="text" x-model="newReview.name" placeholder="John Doe" class="w-full p-2.5 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white focus:ring-accent-500' : 'border-slate-200 text-slate-900'">
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-slate-400">Company Name</label>
-                            <input type="text" x-model="newReview.company" placeholder="e.g. Acme Corp" class="w-full p-2.5 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-900'">
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-slate-400">Your Role</label>
-                            <input type="text" x-model="newReview.role" placeholder="CTO / Founder" class="w-full p-2.5 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-900'">
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-slate-400">Service Category</label>
-                            <select x-model="newReview.category" class="w-full p-2.5 rounded-xl border bg-transparent font-medium focus:outline-none" :class="darkMode ? 'border-slate-800 text-white bg-slate-950' : 'border-slate-200 text-slate-900 bg-white'">
-                                <option value="webdev">Web Design & Dev</option>
-                                <option value="recruitment">Recruitment</option>
-                                <option value="both">Both Services Combined</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-slate-400">Star Rating</label>
-                            <select x-model="newReview.rating" class="w-full p-2.5 rounded-xl border bg-transparent font-medium focus:outline-none" :class="darkMode ? 'border-slate-800 text-white bg-slate-950' : 'border-slate-200 text-slate-900 bg-white'">
-                                <option value="5">5 Stars (Excellent)</option>
-                                <option value="4">4 Stars (Good)</option>
-                                <option value="3">3 Stars (Satisfactory)</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block mb-1 text-slate-400">Review Text</label>
-                            <textarea x-model="newReview.text" rows="3" placeholder="Describe your experience with NarmiTech..." class="w-full p-2.5 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white' : 'border-slate-200 text-slate-900'"></textarea>
-                        </div>
-                        <button type="submit" class="w-full py-3 bg-gradient-to-r from-brand-600 to-accent-600 hover:from-brand-500 hover:to-accent-500 text-white font-extrabold uppercase tracking-wider rounded-xl transition-all">
-                            Post Feedack <i class="fas fa-check-circle ml-2"></i>
-                        </button>
-                    </form>
+            <!-- Testimonial Grid & Live Submissions -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" x-data="{ reviewFilter: 'all' }">
+                
+                <!-- Staggered Filters -->
+                <div class="flex flex-wrap items-center justify-center gap-2.5 mb-12" data-aos="fade-up" data-aos-delay="100">
+                    <button @click="reviewFilter = 'all'; $nextTick(() => AOS.refresh());" 
+                            :class="reviewFilter === 'all' ? 'bg-brand-blue text-white' : 'bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800'" 
+                            class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all">All Evaluations</button>
+                    <button @click="reviewFilter = 'recruitment'; $nextTick(() => AOS.refresh());" 
+                            :class="reviewFilter === 'recruitment' ? 'bg-brand-blue text-white' : 'bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800'" 
+                            class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all">Sourcing Only</button>
+                    <button @click="reviewFilter = 'webdev'; $nextTick(() => AOS.refresh());" 
+                            :class="reviewFilter === 'webdev' ? 'bg-brand-blue text-white' : 'bg-white dark:bg-slate-900 hover:bg-slate-100 dark:hover:bg-slate-850 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-800'" 
+                            class="px-4 py-2 text-xs font-bold uppercase tracking-wider rounded-xl transition-all">Web Design Only</button>
                 </div>
 
-                <!-- Live Client Review List -->
-                <div class="lg:col-span-8 space-y-6">
-                    <div class="flex justify-between items-center pb-4 border-b border-slate-800">
-                        <span class="text-sm font-bold uppercase tracking-widest text-slate-400">All Client Stories</span>
-                        <span class="text-xs font-semibold text-accent-500" x-text="reviews.length + ' Stories Available'"></span>
-                    </div>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <template x-for="rev in reviews" :key="rev.name + rev.date">
-                            <div class="border border-slate-200 dark:border-slate-800 rounded-2xl p-6 flex flex-col justify-between transition-all hover:border-brand-500" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                                <div class="space-y-4">
-                                    <div class="flex justify-between items-start">
-                                        <div>
-                                            <h4 class="font-bold text-base" x-text="rev.name"></h4>
-                                            <span class="text-xs text-slate-400" x-text="rev.role + ' @ ' + rev.company"></span>
-                                        </div>
-                                        <div class="flex text-amber-500 text-xs">
-                                            <template x-for="star in Array.from({length: rev.rating})">
-                                                <i class="fas fa-star"></i>
-                                            </template>
-                                        </div>
-                                    </div>
-                                    <p class="text-xs italic leading-relaxed" :class="darkMode ? 'text-slate-300' : 'text-slate-600'" x-text="'&ldquo;' + rev.text + '&rdquo;'"></p>
+                <!-- Evaluator Grid (With AOS Staggered Entrance and Exit Triggers) -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <template x-for="(r, index) in reviews" :key="r.name + r.company">
+                        <div x-show="reviewFilter === 'all' || r.category === reviewFilter || r.category === 'both'"
+                             x-transition:enter="transition ease-out duration-300"
+                             data-aos="fade-up"
+                             :data-aos-delay="(index % 3) * 150"
+                             class="rounded-2xl p-6 sm:p-8 border flex flex-col justify-between"
+                             :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                            <div>
+                                <div class="flex space-x-1 text-brand-green mb-4">
+                                    <template x-for="i in r.rating">
+                                        <i class="fas fa-star text-[10px]"></i>
+                                    </template>
                                 </div>
-                                <div class="border-t border-slate-800 mt-4 pt-3 flex justify-between items-center text-[10px] font-semibold text-slate-500">
-                                    <span class="uppercase tracking-widest" x-text="rev.category"></span>
-                                    <span x-text="rev.date"></span>
+                                <p class="text-xs italic leading-relaxed mb-6 font-medium text-slate-700 dark:text-slate-300" x-text="'&ldquo;' + r.text + '&rdquo;'"></p>
+                            </div>
+                            
+                            <div class="flex items-center space-x-3.5 pt-4 border-t border-slate-200 dark:border-slate-800">
+                                <div class="w-10 h-10 rounded-full bg-brand-blue/10 text-brand-blue flex items-center justify-center font-bold text-sm" x-text="r.name.charAt(0)"></div>
+                                <div>
+                                    <span class="block text-xs font-bold text-slate-900 dark:text-white" x-text="r.name"></span>
+                                    <span class="block text-[9px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500" x-text="r.role + ' - ' + r.company"></span>
                                 </div>
                             </div>
-                        </template>
+                        </div>
+                    </template>
+                </div>
+
+                <!-- Interactive Evaluation Submission Modal Form -->
+                <div class="mt-20 max-w-2xl mx-auto rounded-3xl p-8 border" 
+                     data-aos="fade-up" data-aos-delay="100"
+                     :class="darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-xl'">
+                    <h3 class="text-2xl font-extrabold mb-2" :class="darkMode ? 'text-white' : 'text-slate-900'">Submit Your Verified Feedback</h3>
+                    <p class="text-xs mb-6 text-slate-500 dark:text-slate-400 font-medium">Your reviews are securely reviewed and verified to help other software teams make robust decisions.</p>
+
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Contact Name</label>
+                                <input type="text" x-model="newReview.name" 
+                                       class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                       :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Company / Org Name</label>
+                                <input type="text" x-model="newReview.company" 
+                                       class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                       :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Corporate Job Role</label>
+                                <input type="text" x-model="newReview.role" 
+                                       class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                       :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Sourced Category</label>
+                                <select x-model="newReview.category" 
+                                        class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                        :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-300 text-slate-750'">
+                                    <option value="recruitment">Connect Sourcing</option>
+                                    <option value="webdev">Build Web Software</option>
+                                    <option value="both">Both Combined Tiers</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Vetted Score</label>
+                            <select x-model="newReview.rating" 
+                                    class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                    :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-300 text-slate-755'">
+                                <option value="5">⭐⭐⭐⭐⭐ (5 / 5 Exceptional)</option>
+                                <option value="4">⭐⭐⭐⭐ (4 / 5 High Standard)</option>
+                                <option value="3">⭐⭐⭐ (3 / 5 Met Criteria)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Performance Comments</label>
+                            <textarea rows="4" x-model="newReview.text" 
+                                      class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                      :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'"></textarea>
+                        </div>
+
+                        <button @click="addReview()" class="w-full py-4 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                            Submit Live Evaluation <i class="fas fa-paper-plane ml-1"></i>
+                        </button>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
 
 
         <!-- ================= CONTACT PAGE ================= -->
-        <div x-show="activePage === 'contact'" x-transition:enter="transition ease-out duration-300 transform opacity-0 scale-[0.99]" x-transition:enter-end="transform opacity-100 scale-100" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12" x-cloak>
+        <div x-show="activePage === 'contact'" x-transition:enter="transition ease-out duration-300" class="space-y-20 pb-20" x-cloak>
             
-            <div class="text-center max-w-3xl mx-auto">
-                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-4" :class="darkMode ? 'bg-brand-500/10 text-brand-300' : 'bg-brand-50 text-brand-700'">Direct Inquiry</span>
-                <h1 class="text-4xl sm:text-5xl font-black mb-4">Let's Fuel Your Project</h1>
-                <p class="text-base sm:text-lg leading-relaxed" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
-                    Ready to hire software developers or initiate a high-speed web design project? Submit your specifications to start.
-                </p>
-            </div>
+            <!-- Contact Header Title -->
+            <section class="relative pt-16 pb-4">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                    <span class="px-3.5 py-1.5 rounded-full font-bold text-xs uppercase tracking-wider"
+                          data-aos="fade-down"
+                          :class="darkMode ? 'bg-brand-blue/15 text-brand-green' : 'bg-blue-50 text-brand-blue'">Secure Communication</span>
+                    <h1 class="text-4xl sm:text-5xl font-black tracking-tight mt-4 mb-4" data-aos="fade-up" data-aos-delay="100" :class="darkMode ? 'text-white' : 'text-slate-900'">Connect to Build & Scale</h1>
+                    <p class="max-w-xl mx-auto text-sm sm:text-base leading-relaxed" data-aos="fade-up" data-aos-delay="200" :class="darkMode ? 'text-slate-400' : 'text-slate-600'">
+                        Ready to pipeline senior engineering talent or deploy static software blueprints? Submit your criteria. Our senior partners respond in 2-4 hours.
+                    </p>
+                </div>
+            </section>
 
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <!-- Info Grid -->
-                <div class="lg:col-span-4 space-y-6">
-                    <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6 space-y-4" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                        <h4 class="text-lg font-bold">NarmiTech Headquarters</h4>
-                        <p class="text-xs text-slate-400 leading-relaxed">Let's arrange a live coordination call with our staffing coordinators and software engineers.</p>
-                        
-                        <div class="space-y-3 pt-2 text-xs font-semibold">
-                            <div class="flex items-center space-x-3 text-slate-400">
-                                <i class="fas fa-clock text-accent-500 text-sm"></i>
-                                <span>Typical Response: Within 4 Hours</span>
+            <!-- Contact Interface Grid -->
+            <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                    
+                    <!-- Sourcing Contacts Panel -->
+                    <div class="lg:col-span-5 space-y-6">
+                        <div class="p-6 rounded-2xl border flex items-start space-x-4" 
+                             data-aos="fade-up" data-aos-delay="100"
+                             :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                            <div class="w-12 h-12 rounded-xl bg-brand-blue/10 text-brand-blue flex items-center justify-center text-xl">
+                                <i class="fas fa-envelope-open-text"></i>
                             </div>
-                            <div class="flex items-center space-x-3 text-slate-400">
-                                <i class="fas fa-envelope text-accent-500 text-sm"></i>
-                                <span>partners@narmitech.com</span>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-slate-200">Corporate Intake Intake</h4>
+                                <p class="text-xs mt-1 text-slate-500 dark:text-slate-400">connect@narmitech.com</p>
+                                <p class="text-[9px] text-brand-green font-bold uppercase mt-1">Typical SLA: Under 4 working hours</p>
                             </div>
-                            <div class="flex items-center space-x-3 text-slate-400">
-                                <i class="fas fa-phone text-accent-500 text-sm"></i>
-                                <span>+1 (800) 555-TMRW</span>
+                        </div>
+
+                        <div class="p-6 rounded-2xl border flex items-start space-x-4" 
+                             data-aos="fade-up" data-aos-delay="200"
+                             :class="darkMode ? 'bg-slate-900/40 border-slate-850' : 'bg-white border-slate-200 shadow-sm'">
+                            <div class="w-12 h-12 rounded-xl bg-brand-green/10 text-brand-green flex items-center justify-center text-xl">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-slate-200">Sourcing Hotline</h4>
+                                <p class="text-xs mt-1 text-slate-500 dark:text-slate-400">+1 (888) 420-NARMI</p>
+                                <p class="text-[9px] text-brand-blue font-bold uppercase mt-1">Available 9:00 AM - 6:00 PM EST</p>
+                            </div>
+                        </div>
+
+                        <!-- FAQ Feature Widget -->
+                        <div class="p-6 rounded-2xl border" 
+                             data-aos="fade-up" data-aos-delay="300"
+                             :class="darkMode ? 'bg-slate-900/20 border-slate-850' : 'bg-white border-slate-200 shadow-sm'" x-data="{ openFaq: 1 }">
+                            <h4 class="font-bold mb-4 text-xs uppercase tracking-wider text-slate-800 dark:text-slate-300">Intake FAQs</h4>
+                            
+                            <div class="border-b pb-3 mb-3 border-slate-200 dark:border-slate-800">
+                                <button @click="openFaq = (openFaq === 1 ? 0 : 1)" class="w-full flex justify-between items-center text-left font-bold text-xs text-slate-800 dark:text-slate-300">
+                                    <span>How does direct placement work?</span>
+                                    <i class="fas text-[9px] text-brand-blue" :class="openFaq === 1 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </button>
+                                <p x-show="openFaq === 1" class="text-xs mt-2 leading-relaxed text-slate-550 dark:text-slate-400">
+                                    Our vetting parameters examine candidate logic, system capabilities, and codebase habits prior to direct matches.
+                                </p>
+                            </div>
+
+                            <div>
+                                <button @click="openFaq = (openFaq === 2 ? 0 : 2)" class="w-full flex justify-between items-center text-left font-bold text-xs text-slate-800 dark:text-slate-300">
+                                    <span>Do you offer bespoke design?</span>
+                                    <i class="fas text-[9px] text-brand-blue" :class="openFaq === 2 ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+                                </button>
+                                <p x-show="openFaq === 2" class="text-xs mt-2 leading-relaxed text-slate-550 dark:text-slate-400">
+                                    Yes! All landing systems, screen parameters, and CMS features follow bespoke visual design codes.
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Static Brand Quote Card -->
-                    <div class="rounded-2xl border border-brand-500/30 p-6 bg-brand-500/10 space-y-3">
-                        <span class="text-[10px] font-black uppercase tracking-widest text-accent-500">Live SLA Active</span>
-                        <h4 class="text-sm font-bold text-white">Full-Stack Capability Guaranteed</h4>
-                        <p class="text-xs text-slate-300 leading-relaxed">Our screening processes cover system architecture, algorithmic logic, and responsive framework optimization natively.</p>
+                    <!-- Main Inquiry Form Section -->
+                    <div class="lg:col-span-7" data-aos="fade-up" data-aos-delay="200">
+                        <div class="p-6 sm:p-8 rounded-2xl border"
+                             :class="darkMode ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200 shadow-md'">
+                            <h3 class="text-2xl font-extrabold mb-6 text-slate-900 dark:text-white">Submit Sourcing Criteria</h3>
+                            
+                            <form @submit.prevent="submitContact()" class="space-y-6">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Representative Name *</label>
+                                        <input type="text" x-model="contactName" required 
+                                               class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                               :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                                    </div>
+                                    <div>
+                                        <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Business Email *</label>
+                                        <input type="email" x-model="contactEmail" required 
+                                               class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                               :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold">Desired Corporate Category</label>
+                                    <select x-model="contactService" 
+                                            class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                            :class="darkMode ? 'bg-slate-950 border-slate-800 text-slate-300' : 'bg-slate-50 border-slate-300 text-slate-750'">
+                                        <option value="both">Both Elite Sourcing & Static Web Software Dev</option>
+                                        <option value="recruitment">Elite Candidate Sourcing Only</option>
+                                        <option value="webdev">Static Web Software Dev Only</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-[10px] font-extrabold uppercase tracking-wider mb-2 text-slate-400 font-bold font-extrabold">Describe Your Project / Staffing Needs *</label>
+                                    <textarea rows="5" x-model="contactMessage" required 
+                                              placeholder="Share candidate parameters, direct tech-stack specifications, or screen development blueprints..." 
+                                              class="w-full border rounded-xl p-3 text-sm focus:ring-2 focus:ring-brand-blue outline-none transition-colors"
+                                              :class="darkMode ? 'bg-obsidian border-slate-800 text-slate-100' : 'bg-slate-50 border-slate-300 text-slate-850'"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full py-4 bg-gradient-to-r from-brand-blue to-brand-blue-dark text-white font-bold text-xs uppercase tracking-wider rounded-xl transition-all shadow-md">
+                                    Secure Transmission Inquiry <i class="fas fa-paper-plane ml-2 text-brand-green"></i>
+                                </button>
+                            </form>
+                        </div>
                     </div>
+
                 </div>
-
-                <!-- Real Form Panel -->
-                <div class="lg:col-span-8 rounded-2xl border border-slate-200 dark:border-slate-800 p-8 sm:p-10" :class="darkMode ? 'bg-slate-900/40' : 'bg-white shadow-sm'">
-                    <form @submit.prevent="submitContact()" class="space-y-6 text-xs font-semibold">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-slate-400 uppercase tracking-widest mb-1">Your Full Name *</label>
-                                <input type="text" x-model="contactName" placeholder="e.g. Liam Thompson" class="w-full p-3 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white focus:ring-accent-500' : 'border-slate-200 text-slate-900'">
-                            </div>
-                            <div>
-                                <label class="block text-slate-400 uppercase tracking-widest mb-1">Business Email Address *</label>
-                                <input type="email" x-model="contactEmail" placeholder="liam@company.com" class="w-full p-3 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white focus:ring-accent-500' : 'border-slate-200 text-slate-900'">
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            <div>
-                                <label class="block text-slate-400 uppercase tracking-widest mb-1">Requested Action *</label>
-                                <select x-model="contactService" class="w-full p-3 rounded-xl border bg-transparent font-medium focus:outline-none" :class="darkMode ? 'border-slate-800 text-white bg-slate-950' : 'border-slate-200 text-slate-900 bg-white'">
-                                    <option value="both">Both Services Combined</option>
-                                    <option value="recruitment">Recruitment & Sourcing</option>
-                                    <option value="webdev">Static Web Development</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-slate-400 uppercase tracking-widest mb-1">Approximate Urgency</label>
-                                <select class="w-full p-3 rounded-xl border bg-transparent font-medium focus:outline-none" :class="darkMode ? 'border-slate-800 text-white bg-slate-950' : 'border-slate-200 text-slate-900 bg-white'">
-                                    <option value="immediate">Immediate (Within 1-2 Weeks)</option>
-                                    <option value="medium">Medium (Within 1 Month)</option>
-                                    <option value="flexible">Flexible Coordination</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-slate-400 uppercase tracking-widest mb-1">Details / Project Description *</label>
-                            <textarea x-model="contactMessage" rows="5" placeholder="Specify coding stack needed, page count, or corporate criteria..." class="w-full p-3 rounded-xl border bg-transparent font-medium" :class="darkMode ? 'border-slate-800 text-white focus:ring-accent-500' : 'border-slate-200 text-slate-900'"></textarea>
-                        </div>
-
-                        <div class="flex items-center space-x-2 text-slate-500 text-[11px]">
-                            <i class="fas fa-shield-halved text-accent-500"></i>
-                            <span>Secure form. We adhere strictly to standard privacy principles. Zero marketing spam.</span>
-                        </div>
-
-                        <button type="submit" class="w-full py-4 bg-gradient-to-r from-brand-600 to-accent-600 text-white font-extrabold uppercase tracking-widest rounded-xl transition-all shadow-md hover:shadow-lg">
-                            Send Sourcing Request <i class="fas fa-paper-plane ml-2"></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
+            </section>
         </div>
     </main>
 
-    <!-- Footer Section -->
-    <footer class="border-t transition-colors duration-300" :class="darkMode ? 'bg-slate-950 border-slate-900 text-slate-400' : 'bg-slate-100 border-slate-200 text-slate-600'">
+    <!-- ================= FOOTER SECTION ================= -->
+    <footer class="border-t mt-auto transition-colors duration-300 relative z-10" 
+            :class="darkMode ? 'bg-slate-950 border-slate-900 text-slate-400' : 'bg-white border-slate-200 text-slate-600'">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-                <!-- Branding Col -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                
                 <div class="space-y-4">
-                    <div class="flex items-center space-x-3 cursor-pointer group" @click="activePage = 'home'">
-                        <div class="w-9 h-9 rounded-lg bg-slate-950 flex items-center justify-center overflow-hidden border border-brand-500/30">
-                            <img src="narmi.jpeg" alt="NarmiTech Logo Symbol" class="w-full h-full object-cover scale-150">
+                    <div class="flex items-center space-x-2.5 cursor-pointer" @click="activePage = 'home'">
+                        <div class="w-8 h-8 rounded bg-gradient-to-tr from-brand-blue to-brand-green p-[1px] flex items-center justify-center overflow-hidden">
+                            <img src="narmi.jpeg" alt="NarmiTech Footer Brand Symbol" class="w-full h-full object-cover scale-150">
                         </div>
-                        <span class="text-xl font-black text-white bg-gradient-to-r from-brand-500 to-accent-500 bg-clip-text text-transparent">NarmiTech</span>
+                        <span class="text-lg font-black tracking-tight text-slate-900 dark:text-white">NarmiTech</span>
                     </div>
-                    <p class="text-xs leading-relaxed">
-                        Pioneering the double-force technical agency model. Handcrafting modern systems while scaling internal teams simultaneously.
+                    <p class="text-xs leading-relaxed text-slate-500 dark:text-slate-400">
+                        Fusing premier technical candidate sourcing operations with elite handcrafted static platform deployments. Build. Connect. Scale.
                     </p>
                 </div>
 
-                <!-- Page Links Col -->
-                <div class="space-y-3">
-                    <h5 class="text-xs font-black uppercase tracking-widest text-slate-200">Core Services</h5>
-                    <ul class="space-y-2 text-xs font-semibold">
-                        <li><button @click="activePage = 'recruitment'" class="hover:text-accent-500 transition-colors">Pre-Vetted Developers Sourcing</button></li>
-                        <li><button @click="activePage = 'webdev'" class="hover:text-accent-500 transition-colors">Speed Static Web Design</button></li>
-                        <li><button @click="activePage = 'reviews'" class="hover:text-accent-500 transition-colors">Partners Testimonials</button></li>
+                <div>
+                    <h5 class="font-extrabold text-xs uppercase tracking-wider mb-4 text-slate-900 dark:text-white">Sourcing Pillars</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" @click.prevent="activePage = 'recruitment'" class="hover:text-brand-blue transition-colors">Direct Placements</a></li>
+                        <li><a href="#" @click.prevent="activePage = 'recruitment'" class="hover:text-brand-blue transition-colors">Staff Augmentation</a></li>
+                        <li><a href="#" @click.prevent="activePage = 'recruitment'" class="hover:text-brand-blue transition-colors">Connect Configurator</a></li>
                     </ul>
                 </div>
 
-                <!-- Tech Col -->
-                <div class="space-y-3">
-                    <h5 class="text-xs font-black uppercase tracking-widest text-slate-200">Our Stack</h5>
-                    <ul class="space-y-2 text-xs font-semibold">
-                        <li><span class="text-slate-400">Tailwind CSS & Alpine JS</span></li>
-                        <li><span class="text-slate-400">Next.js Static Engines</span></li>
-                        <li><span class="text-slate-400">Cloudflare Edge Architecture</span></li>
+                <div>
+                    <h5 class="font-extrabold text-xs uppercase tracking-wider mb-4 text-slate-900 dark:text-white">Web Architecture</h5>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" @click.prevent="activePage = 'webdev'" class="hover:text-brand-green transition-colors">Static Screen Tiers</a></li>
+                        <li><a href="#" @click.prevent="activePage = 'webdev'" class="hover:text-brand-green transition-colors">Cost Estimator</a></li>
+                        <li><a href="#" @click.prevent="activePage = 'reviews'" class="hover:text-brand-green transition-colors">Partner Stories</a></li>
                     </ul>
                 </div>
 
-                <!-- Direct Action Col -->
-                <div class="space-y-4">
-                    <h5 class="text-xs font-black uppercase tracking-widest text-slate-200">Need Immediate Support?</h5>
-                    <button @click="activePage = 'contact'" class="w-full py-2.5 bg-slate-900 hover:bg-slate-850 text-white rounded-lg text-xs font-bold border border-slate-800 transition-all flex items-center justify-center gap-2">
-                        <i class="fas fa-headset text-accent-500"></i> Initiate Call
-                    </button>
+                <div>
+                    <h5 class="font-extrabold text-xs uppercase tracking-wider mb-4 text-slate-900 dark:text-white">Inquiries</h5>
+                    <ul class="space-y-2 text-xs text-slate-500 dark:text-slate-400">
+                        <li><span>Email: connect@narmitech.com</span></li>
+                        <li><span>Phone: +1 (888) 420-NARMI</span></li>
+                    </ul>
+                    <div class="flex space-x-3 mt-4 text-sm">
+                        <a href="#" class="hover:text-brand-blue transition-colors"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-brand-blue transition-colors"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="hover:text-brand-blue transition-colors"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
+
             </div>
 
-            <div class="pt-8 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 font-semibold gap-4">
-                <span>&copy; 2026 NarmiTech Pvt Ltd. All Rights Reserved.</span>
-                <div class="flex space-x-4">
-                    <a href="#" class="hover:text-accent-500 transition-colors"><i class="fab fa-github"></i></a>
-                    <a href="#" class="hover:text-accent-500 transition-colors"><i class="fab fa-linkedin"></i></a>
-                    <a href="#" class="hover:text-accent-500 transition-colors"><i class="fab fa-twitter"></i></a>
+            <div class="mt-8 pt-8 border-t flex flex-col sm:flex-row items-center justify-between text-[11px] font-medium border-slate-200 dark:border-slate-900 text-slate-450 dark:text-slate-500">
+                <p>&copy; 2026 NarmiTech Pvt Ltd. Build. Connect. Scale. All Rights Reserved.</p>
+                <div class="flex space-x-4 mt-4 sm:mt-0">
+                    <a href="#" class="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Privacy Charter</a>
+                    <a href="#" class="hover:text-slate-700 dark:hover:text-slate-300 transition-colors">Service Standards</a>
                 </div>
             </div>
         </div>
     </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init({
+                duration: 650,
+                once: false,       // Entry triggers on downscroll
+                mirror: true,      // Exit/fade-out triggers on upscroll dynamically
+                offset: 60,
+                easing: 'ease-out-cubic'
+            });
+            
+            AOS.refreshHard = function() {
+                AOS.refresh();
+                const elements = document.querySelectorAll('[data-aos]');
+                elements.forEach(el => {
+                    el.classList.remove('aos-animate');
+                    setTimeout(() => {
+                        el.classList.add('aos-animate');
+                    }, 50);
+                });
+            }
+        });
+    </script>
 </body>
 </html>
